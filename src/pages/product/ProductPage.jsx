@@ -2,7 +2,7 @@ import ProductDataTable from "./component/ProductDataTable";
 
 function ProductPage() {
     return (
-        <div className="w-screen p-10 bg-slate-200">
+        <div className="w-full my-10 bg-slate-200">
             <ProductDataTable />
         </div>
     )

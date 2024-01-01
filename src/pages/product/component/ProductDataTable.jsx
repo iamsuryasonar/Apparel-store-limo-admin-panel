@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 import React, { useState, useMemo } from 'react'
 import DataTable from 'react-data-table-component';
-
+import { Link } from 'react-router-dom'
 const columns = [
     {
         name: 'Product',
@@ -172,7 +172,7 @@ function ProductDataTable() {
 
         return (
             <div className='flex justify-between items-center'>
-                <button className='px-2 py-1 bg-green-400 rounded-md ' onClick={addProduct}>Add product</button>
+                <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md' onClick={addProduct}>Add product</Link>
                 <div>
                     <input
                         id="search"
