@@ -1,32 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
-import React, { useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearMessage } from '../../../store/slices/messageSlice';
+import { get_all_products } from '../../../store/slices/productSlice';
+
 const columns = [
     {
-        name: 'Product',
-        selector: row => row.product,
+        name: 'Name',
+        selector: row => row.name,
         sortable: true,
     },
     {
-        name: 'Update',
-        selector: row => row.update,
+        name: 'Description',
+        selector: row => row.description,
         sortable: true,
     },
     {
-        name: 'price',
-        selector: row => row.price,
+        name: 'Keyword',
+        selector: row => row.keyword,
         sortable: true,
     },
     {
-        name: 'Quantity',
-        selector: row => row.quantity,
-        sortable: true,
-    },
-    {
-        name: 'Status',
-        selector: row => row.status,
+        name: 'Tag',
+        selector: row => row.tag,
         sortable: true,
     },
     {
@@ -36,125 +35,36 @@ const columns = [
     },
 ];
 
-const data = [
-    {
-        id: 1,
-        product: 'Beetlejuice',
-        update: '11/11/2017',
-        price: '999',
-        quantity: '99',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 2,
-        product: 'Ghostbusters',
-        update: '11/11/2017',
-        price: '1988',
-        quantity: '90',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 3,
-        product: 'Beetlejuice',
-        update: '11/11/2017',
-        price: '999',
-        quantity: '99',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 4,
-        product: 'Ghostbusters',
-        update: '11/11/2017',
-        price: '1988',
-        quantity: '90',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 5,
-        product: 'Beetlejuice',
-        update: '11/11/2017',
-        price: '999',
-        quantity: '99',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 6,
-        product: 'Ghostbusters',
-        update: '11/11/2017',
-        price: '1988',
-        quantity: '90',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 7,
-        product: 'Beetlejuice',
-        update: '11/11/2017',
-        price: '999',
-        quantity: '99',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 8,
-        product: 'Ghostbusters',
-        update: '11/11/2017',
-        price: '1988',
-        quantity: '90',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 9,
-        product: 'Beetlejuice',
-        update: '11/11/2017',
-        price: '999',
-        quantity: '99',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 10,
-        product: 'Ghostbusters10',
-        update: '11/11/2017',
-        price: '1988',
-        quantity: '90',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 11,
-        product: 'Beetlejuice11',
-        update: '11/11/2017',
-        price: '999',
-        quantity: '99',
-        status: 'in stock',
-        action: '1988',
-    },
-    {
-        id: 12,
-        product: 'Ghostbusters12',
-        update: '11/11/2017',
-        price: '1988',
-        quantity: '90',
-        status: 'in stock',
-        action: '1988',
-    },
-]
-
-
-
 function ProductDataTable() {
     const [value, setValue] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+    const dispatch = useDispatch();
+    const [perPage, setPerPage] = useState(10);
+    const data = useSelector((state) => state.products);
+    const loading = useSelector((state) => state.loading.value);
+    const totalRows = data?.products?.pagination?.total_products;
 
-    const filteredItems = data.filter(
-        item => item.product && item.product.toLowerCase().includes(value.toLowerCase()),
+    const fetchProducts = (page, limit) => {
+        dispatch(get_all_products({ page: page, limit: limit }));
+    }
+
+    useEffect(() => {
+        dispatch(clearMessage());
+        fetchProducts(0, 10);
+    }, []);
+
+
+    const handlePageChange = (page) => {
+        fetchProducts(page, perPage);
+    };
+
+    const handlePerRowsChange = async (newPerPage, page) => {
+        fetchProducts(page, newPerPage)
+        setPerPage(newPerPage);
+    };
+
+    const filteredItems = data?.products?.products?.filter(
+        item => item.name && item.name.toLowerCase().includes(value.toLowerCase()),
     );
 
     function addProduct() {
@@ -171,7 +81,7 @@ function ProductDataTable() {
         };
 
         return (
-            <div className='flex justify-between items-center'>
+            <div className='w-full flex justify-between items-center'>
                 <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md' onClick={addProduct}>Add product</Link>
                 <div>
                     <input
@@ -191,36 +101,43 @@ function ProductDataTable() {
 
     return (
         <>
-            <DataTable
-                title="Products"
-                columns={columns}
-                data={filteredItems.map((item) => {
-                    return {
-                        id: item.id,
-                        product: item.product,
-                        update: item.update,
-                        price: item.price,
-                        quantity: item.quantity,
-                        status: (<div className='p-2 rounded-2xl bg-green-400'>
-                            {item.status}
-                        </div>
-                        ),
-                        action: (
-                            <>
-                                <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
-                                <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
-                            </>
-                        ),
+            <div className='w-full'>
+                {filteredItems && <DataTable
+                    title="Products"
+                    columns={columns}
+                    data={
+                        filteredItems.map((item) => {
+                            return {
+                                name: item.name,
+                                description: item.description,
+                                keyword: item.keyword,
+                                tag: item.tag,
+                                action: (
+                                    <>
+                                        <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
+                                        <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
+                                    </>
+                                ),
+                            }
+                        })
                     }
-                })}
-                pagination
-                paginationResetDefaultPage={resetPaginationToggle}
-                subHeader
-                subHeaderComponent={subHeaderComponentMemo}
-                persistTableHead
-            />
+                    pagination
+                    paginationServer
+                    paginationTotalRows={totalRows}
+                    onChangeRowsPerPage={handlePerRowsChange}
+                    onChangePage={handlePageChange}
+                    paginationResetDefaultPage={resetPaginationToggle}
+                    responsive
+                    pointerOnHover
+                    subHeader
+                    subHeaderComponent={subHeaderComponentMemo}
+                    persistTableHead
+                    progressPending={loading}
+                />}
+            </div>
         </>
     );
 };
 
 export default ProductDataTable;
+

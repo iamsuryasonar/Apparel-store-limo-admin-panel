@@ -97,16 +97,18 @@ const DashboardPage = () => {
 
 
     return (
-        <div className='my-10 flex flex-col gap-4 '>
-            <div className='w-full grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-                <Widget title={'Total Orders'} icon={faCartShopping} />
-                <Widget title={'Total Sales'} icon={faWallet} />
-                <Widget title={'New Customer'} icon={faUser} />
-                <Widget title={'Users Online'} icon={faPerson} />
+        <div className='w-full p-6 grid place-content-center '>
+            <div className='w-full  max-w-4xl my-10 flex flex-col items-center justify-center gap-4 '>
+                <div className='w-full  grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+                    <Widget title={'Total Orders'} icon={faCartShopping} />
+                    <Widget title={'Total Sales'} icon={faWallet} />
+                    <Widget title={'New Customer'} icon={faUser} />
+                    <Widget title={'Users Online'} icon={faPerson} />
+                </div>
+                <BestSellerCard />
+                <RevenueGraphCard />
+                <LatestOrdersCard />
             </div>
-            <BestSellerCard />
-            <RevenueGraphCard />
-            <LatestOrdersCard />
         </div>
     );
 };

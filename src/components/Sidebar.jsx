@@ -2,14 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faImage, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const Sidebar = ({ isSidebarOpen, setCurrentRoute }) => {
-    const location = useLocation();
-    setCurrentRoute(location.pathname)
+const Sidebar = ({ isSidebarOpen }) => {
 
     return (
         <nav className='fixed h-full'>
-            <aside className={` bg-gray-800 h-full overflow-y-auto text-white ${isSidebarOpen ? 'w-64' : 'w-20'} transition-all duration-300 ease-in-out`}>
+            <aside className={` bg-gray-800 h-full overflow-y-auto text-white ${isSidebarOpen ? 'w-64' : 'w-20'} transition-all duration-300 ease-in-out `}>
                 <div className="px-4 flex items-center justify-between h-16 bg-gray-700">
                     <span className="text-xl font-semibold">Logo</span>
                 </div>

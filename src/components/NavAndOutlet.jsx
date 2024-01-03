@@ -9,7 +9,6 @@ import { faBars, faCartShopping, faWallet, faUser, faPerson } from '@fortawesome
 
 function NavAndOutlet() {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
-    const [currentRoute, setCurrentRoute] = useState('');
 
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
@@ -17,18 +16,18 @@ function NavAndOutlet() {
 
     return (
         <div className="w-screen h-full flex">
-            <Sidebar isSidebarOpen={isSidebarOpen} setCurrentRoute={setCurrentRoute} />
+            <Sidebar isSidebarOpen={isSidebarOpen} />
             <div className={`w-full ${isSidebarOpen ? 'ms-64' : 'ms-20'}  transition-all duration-300 ease-in-out`}>
-                <div className={`h-16 p-4 z-10 fixed top-0 ${isSidebarOpen ? 'left-64' : 'left-20'} right-0 flex justify-between items-center  bg-gray-400 transition-all duration-300 ease-in-out `}>
-                    <button className="p-2 focus:outline-none" onClick={toggleSidebar}>
+                <div className={`w-full z-10 h-16 p-4 fixed top-0 ${isSidebarOpen ? 'left-64' : 'left-20'} right-0 flex justify-between items-center  bg-gray-400 transition-all duration-300 ease-in-out `}>
+                    <button className="p-2 focus:outline-none hidden md:grid" onClick={toggleSidebar}>
                         <FontAwesomeIcon className='text-xl' icon={faBars} />
                     </button>
-                    <h1 className='text-2xl uppercase'>{currentRoute.replace(/[-/]+/g, " ")}</h1>
+                    <h1 className='text-2xl uppercase'>Limo Admin</h1>
                     <div></div>
                 </div>
                 <div className='w-full h-16'></div>
-                <div className='flex justify-center items-center'>
-                    <div className='max-w-4xl w-full p-6'>
+                <div className='w-full flex justify-center items-center'>
+                    <div className=' w-full '>
                         <Outlet />
                     </div>
                 </div>

@@ -10,16 +10,41 @@ import LogInPage from './pages/LogInPage'
 import ProductPage from './pages/product/ProductPage'
 import RegisterPage from './pages/RegisterPage'
 import AddProductPage from './pages/product/AddProductPage'
-
+import PrivateRoute from './components/auth_guards/private_route'
+import PublicRoute from './components/auth_guards/authGuard'
 function App() {
   return (
     <Routes>
       <Route element={<NavAndOutlet />}>
-        <Route path='/' element={<LogInPage />}></Route>
-        <Route path='/sign-up' element={<RegisterPage />}></Route>
-        <Route path='/dashboard' element={<DashboardPage />}></Route>
-        <Route path='/product' element={<ProductPage />}></Route>
-        <Route path='/add-product' element={<AddProductPage />}></Route>
+        <Route path='/' element={
+          <PublicRoute>
+            <LogInPage />
+          </PublicRoute>
+        }
+        ></Route>
+        <Route path='/sign-up' element={<PublicRoute>
+          <RegisterPage />
+        </PublicRoute>
+        }
+        ></Route>
+        <Route path='/dashboard' element={
+          <PrivateRoute>
+            <DashboardPage />
+          </PrivateRoute>
+        }
+        ></Route>
+        <Route path='/product' element={
+          <PrivateRoute>
+            <ProductPage />
+          </PrivateRoute>
+        }
+        ></Route>
+        <Route path='/add-product' element={
+          <PrivateRoute>
+            <AddProductPage />
+          </PrivateRoute>
+        }
+        ></Route>
       </Route >
     </Routes >
   )
