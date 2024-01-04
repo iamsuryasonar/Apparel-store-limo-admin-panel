@@ -14,9 +14,6 @@ const register = (creds) => {
 
 const login = async (creds) => {
     const response = await axios.post(API_URL + 'auth/adminLogin', creds);
-    if (response.data.data.name) {
-        localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(response.data.data));
-    }
     return response.data.data;
 }
 
@@ -25,7 +22,7 @@ const logout = () => {
 }
 
 const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME));
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME))?.userData;
 }
 
 const AuthServices = {

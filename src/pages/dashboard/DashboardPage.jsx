@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCartShopping, faWallet, faUser, faPerson } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 
 
@@ -94,21 +96,27 @@ const LatestOrdersCard = () => {
 }
 
 const DashboardPage = () => {
-
+    const loading = useSelector((state) => state.loading.value);
 
     return (
         <div className='w-full p-6 grid place-content-center '>
-            <div className='w-full  max-w-4xl my-10 flex flex-col items-center justify-center gap-4 '>
-                <div className='w-full  grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-                    <Widget title={'Total Orders'} icon={faCartShopping} />
-                    <Widget title={'Total Sales'} icon={faWallet} />
-                    <Widget title={'New Customer'} icon={faUser} />
-                    <Widget title={'Users Online'} icon={faPerson} />
+            {loading ? (
+                <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center  bg-opacity-90 z-50">
+                    <div className="animate-spin border-t-8 border-blue-500 border-solid rounded-full w-16 h-16"></div>
                 </div>
-                <BestSellerCard />
-                <RevenueGraphCard />
-                <LatestOrdersCard />
-            </div>
+            ) :
+                <div className='w-full  max-w-4xl my-10 flex flex-col items-center justify-center gap-4 '>
+                    <div className='w-full  grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+                        <Widget title={'Total Orders'} icon={faCartShopping} />
+                        <Widget title={'Total Sales'} icon={faWallet} />
+                        <Widget title={'New Customer'} icon={faUser} />
+                        <Widget title={'Users Online'} icon={faPerson} />
+                    </div>
+                    <BestSellerCard />
+                    <RevenueGraphCard />
+                    <LatestOrdersCard />
+                </div>
+            }
         </div>
     );
 };

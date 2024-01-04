@@ -72,6 +72,8 @@ function ProductDataTable() {
     }
 
 
+
+
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (value) {
@@ -101,39 +103,45 @@ function ProductDataTable() {
 
     return (
         <>
-            <div className='w-full'>
-                {filteredItems && <DataTable
-                    title="Products"
-                    columns={columns}
-                    data={
-                        filteredItems.map((item) => {
-                            return {
-                                name: item.name,
-                                description: item.description,
-                                keyword: item.keyword,
-                                tag: item.tag,
-                                action: (
-                                    <>
-                                        <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
-                                        <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
-                                    </>
-                                ),
-                            }
-                        })
-                    }
-                    pagination
-                    paginationServer
-                    paginationTotalRows={totalRows}
-                    onChangeRowsPerPage={handlePerRowsChange}
-                    onChangePage={handlePageChange}
-                    paginationResetDefaultPage={resetPaginationToggle}
-                    responsive
-                    pointerOnHover
-                    subHeader
-                    subHeaderComponent={subHeaderComponentMemo}
-                    persistTableHead
-                    progressPending={loading}
-                />}
+            <div className=' w-full flex flex-col'>
+                {loading ? (
+                    <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center  bg-opacity-90 z-50">
+                        <div className="animate-spin border-t-8 border-blue-500 border-solid rounded-full w-16 h-16"></div>
+                    </div>
+                ) :
+                    filteredItems && <DataTable
+                        title="Products"
+                        columns={columns}
+                        data={
+                            filteredItems.map((item) => {
+                                return {
+                                    name: item.name,
+                                    description: item.description,
+                                    keyword: item.keyword,
+                                    tag: item.tag,
+                                    action: (
+                                        <>
+                                            <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
+                                            <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
+                                        </>
+                                    ),
+                                }
+                            })
+                        }
+                        pagination
+                        paginationServer
+                        paginationTotalRows={totalRows}
+                        onChangeRowsPerPage={handlePerRowsChange}
+                        onChangePage={handlePageChange}
+                        paginationResetDefaultPage={resetPaginationToggle}
+                        responsive
+                        pointerOnHover
+                        subHeader
+                        subHeaderComponent={subHeaderComponentMemo}
+                        persistTableHead
+                        progressPending={loading}
+                    />
+                }
             </div>
         </>
     );

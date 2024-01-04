@@ -9,7 +9,6 @@ export const get_all_products = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.getAllProducts(pagination_info);
-            // thunkAPI.dispatch(get_profile_info());
             return response;
         } catch (error) {
             const message =

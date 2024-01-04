@@ -3,6 +3,7 @@ import authReducer from './slices/authSlice';
 import messageReducer from './slices/messageSlice';
 import loadingReducer from './slices/loadingSlice';
 import productsReducer from './slices/productSlice';
+import { initialiseUser } from './slices/authSlice';
 
 export const store = configureStore({
     reducer: {
@@ -11,4 +12,9 @@ export const store = configureStore({
         loading: loadingReducer,
         products: productsReducer,
     },
-})
+});
+
+
+store.dispatch(initialiseUser());
+
+export default store;

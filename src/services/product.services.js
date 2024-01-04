@@ -5,7 +5,7 @@ import { LOCAL_STORAGE_NAME, API_URL } from '../common/constants'
 const getheaders = () => {
     const headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME)).token}`,
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME)).accessToken}`,
     }
     return headers
 }
