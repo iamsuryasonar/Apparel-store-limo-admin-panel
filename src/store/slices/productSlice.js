@@ -54,6 +54,107 @@ export const add_product = createAsyncThunk(
     }
 );
 
+export const add_color_and_its_size_variant = createAsyncThunk(
+    "products/add_color_size_variant",
+    async (body, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.add_color_size_variant(body);
+            thunkAPI.dispatch(setMessage(response.data.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
+export const update_product_info = createAsyncThunk(
+    "products/update_product_info",
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.update_product_info(data);
+            thunkAPI.dispatch(setMessage(response.data.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
+
+export const add_size_variant = createAsyncThunk(
+    "products/add_size_variant",
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.add_size_variant(data);
+            thunkAPI.dispatch(setMessage(response.data.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
+export const update_size_variant = createAsyncThunk(
+    "products/update_size_variant",
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.update_size_variant(data);
+            thunkAPI.dispatch(setMessage(response.data.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
 export const delete_product = createAsyncThunk(
     "products/delete_product",
     async (id, thunkAPI) => {

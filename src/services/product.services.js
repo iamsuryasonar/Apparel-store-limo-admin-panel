@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { LOCAL_STORAGE_NAME, API_URL } from '../common/constants'
 
-
 const getheaders = () => {
     const headers = {
         'Content-Type': 'application/json',
@@ -10,6 +9,14 @@ const getheaders = () => {
     return headers
 }
 
+const getMultipartheaders = () => {
+    const headers = {
+        "Accept": "*/*",
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME)).accessToken}`,
+    }
+    return { headers }
+}
 const getAllProducts = async (pagination_info) => {
 
     const response = await axios
@@ -32,17 +39,107 @@ const getProductsByCategory = async (id) => {
     return response.data
 }
 
-const addProduct = async (body) => {
+const addProduct = async (data) => {
+    console.log(data.colorVariant.thumbnail);
+    const formData = new FormData();
+    //product info
+    formData.append("name", data.product.name);
+    formData.append("description", data.product.description);
+    formData.append("keyword", data.product.keyword);
+    formData.append("tag", data.product.tag);
+    formData.append("category", data.product.category);
+    //color Variant name and thumbnail
+    formData.append("colorVariantName", data.colorVariant.name);
+    formData.append("colorVariantThumbnail", data.colorVariant.thumbnail);
+
+    //color Variant images
+    for (let i = 0; i < data.images.length; i++) {
+        formData.append('images', data.images[i].image);
+    }
+
+    for (let i = 0; i < data.sizeVariants.length; i++) {
+        formData.append('sizeVariants', JSON.stringify(data.sizeVariants[i]));
+    }
+
     const response = await axios
         .post(
-            API_URL + 'product/', body, getheaders()
+            API_URL + 'product/', formData, getMultipartheaders()
         )
     return response.data
 }
-const updateProduct = async (body, id) => {
+
+const add_color_size_variant = async (data) => {
+    const formData = new FormData();
+    //product info
+
+    formData.append("productId", data.productId);
+    //color Variant name and thumbnail
+    formData.append("colorVariantName", data.colorVariant.name);
+    formData.append("colorVariantThumbnail", data.colorVariant.thumbnail);
+
+    //color Variant images
+    for (let i = 0; i < data.images.length; i++) {
+        formData.append('images', data.images[i].image);
+    }
+
+    for (let i = 0; i < data.sizeVariants.length; i++) {
+        formData.append('sizeVariants', JSON.stringify(data.sizeVariants[i]));
+    }
+
     const response = await axios
         .put(
-            API_URL + 'product/' + id, body, getheaders()
+            API_URL + 'product/addcolorandsizes', formData, getMultipartheaders()
+        )
+    return response.data
+}
+
+const update_product_info = async (data) => {
+
+    const formData = new FormData();
+    //product info
+    formData.append("name", data.product.name);
+    formData.append("description", data.product.description);
+    formData.append("keyword", data.product.keyword);
+    formData.append("tag", data.product.tag);
+    formData.append("category", data.product.category);
+
+    const response = await axios
+        .put(
+            API_URL + 'product/product_info/' + data.productId, formData, getMultipartheaders()
+        )
+    return response.data
+}
+
+const add_size_variant = async (data) => {
+
+    const formData = new FormData();
+    //size variant info
+    formData.append("name", data.sizeVariant.name);
+    formData.append("stock", data.sizeVariant.stock);
+    formData.append("mrp", data.sizeVariant.mrp);
+    formData.append("selling_price", data.sizeVariant.selling_price);
+    formData.append("status", data.sizeVariant.status);
+
+    const response = await axios
+        .post(
+            API_URL + 'product/add_size/' + data.colorVariantId, formData, getMultipartheaders()
+        )
+    return response.data
+}
+
+const update_size_variant = async (data) => {
+
+    const formData = new FormData();
+    //size variant info
+    formData.append("name", data.sizeVariant.name);
+    formData.append("stock", data.sizeVariant.stock);
+    formData.append("mrp", data.sizeVariant.mrp);
+    formData.append("selling_price", data.sizeVariant.selling_price);
+    formData.append("status", data.sizeVariant.status);
+
+    const response = await axios
+        .put(
+            API_URL + 'product/update_size/' + data.sizeVariantId, formData, getMultipartheaders()
         )
     return response.data
 }
@@ -58,8 +155,11 @@ const productServices = {
     getAllProducts,
     getProductsByCategory,
     addProduct,
-    updateProduct,
     deleteProduct,
+    add_color_size_variant,
+    update_product_info,
+    add_size_variant,
+    update_size_variant
 }
 
 export default productServices;

@@ -35,7 +35,7 @@ const columns = [
     },
 ];
 
-function ProductDataTable() {
+function ProductDataTable({ onEditToggle }) {
     const [value, setValue] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
     const dispatch = useDispatch();
@@ -82,6 +82,7 @@ function ProductDataTable() {
             }
         };
 
+
         return (
             <div className='w-full flex justify-between items-center'>
                 <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md' onClick={addProduct}>Add product</Link>
@@ -122,7 +123,7 @@ function ProductDataTable() {
                                     action: (
                                         <>
                                             <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
-                                            <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
+                                            <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={() => onEditToggle(item, data?.products?.categories)} />
                                         </>
                                     ),
                                 }
