@@ -24,12 +24,8 @@ function ProductPage() {
     return (
         <>
             {editProductToggle ? (<EditProduct onEditToggle={onEditToggle} product={product} categories={categories} />) : (
-                <div className='w-full flex justify-center items-center'>
-                    <div className='max-w-4xl w-full my-10 gap-4'>
-                        <div className='w-full  flex flex-col'>
-                            <ProductDataTable onEditToggle={onEditToggle} />
-                        </div>
-                    </div>
+                <div className=''>
+                    <ProductDataTable onEditToggle={onEditToggle} />
                 </div>
             )}
         </>

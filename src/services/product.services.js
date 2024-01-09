@@ -93,6 +93,43 @@ const add_color_size_variant = async (data) => {
     return response.data
 }
 
+const update_thumbnail = async (data) => {
+    const formData = new FormData();
+
+    formData.append("path", data.thumbnailPath);
+    formData.append("thumbnail", data.image);
+
+    const response = await axios
+        .put(
+            API_URL + 'product/update_thumbnail/' + data.colorVariantId, formData, getMultipartheaders()
+        )
+    return response.data
+}
+const update_image = async (data) => {
+    const formData = new FormData();
+
+    formData.append("filename", data.path);
+    formData.append("image", data.image);
+
+    const response = await axios
+        .put(
+            API_URL + 'product/update_image/' + data.imageId, formData, getMultipartheaders()
+        )
+    return response.data
+}
+const add_image = async (data) => {
+    const formData = new FormData();
+
+    formData.append("image", data.image);
+
+    const response = await axios
+        .post(
+            API_URL + 'product/add_image/' + data.colorVariantId, formData, getMultipartheaders()
+        )
+    return response.data
+}
+
+
 const update_product_info = async (data) => {
 
     const formData = new FormData();
@@ -109,6 +146,8 @@ const update_product_info = async (data) => {
         )
     return response.data
 }
+
+
 
 const add_size_variant = async (data) => {
 
@@ -159,7 +198,10 @@ const productServices = {
     add_color_size_variant,
     update_product_info,
     add_size_variant,
-    update_size_variant
+    update_size_variant,
+    update_thumbnail,
+    add_image,
+    update_image
 }
 
 export default productServices;

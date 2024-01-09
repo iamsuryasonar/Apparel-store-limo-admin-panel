@@ -50,7 +50,7 @@ function ProductDataTable({ onEditToggle }) {
 
     useEffect(() => {
         dispatch(clearMessage());
-        fetchProducts(0, 10);
+        fetchProducts(1, 10);
     }, []);
 
 

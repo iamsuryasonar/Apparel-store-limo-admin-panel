@@ -22,7 +22,6 @@ function App() {
   return (
     <Routes>
       <Route element={<NavAndOutlet />}>
-
         <Route element={<PublicRoute userData={userData} />}>
           <Route path='/' element={<LogInPage />}></Route>
           <Route path='/sign-up' element={<RegisterPage />}></Route>

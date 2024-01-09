@@ -155,6 +155,82 @@ export const update_size_variant = createAsyncThunk(
         }
     }
 )
+
+export const update_thumbnail = createAsyncThunk(
+    "products/update_thumbnail",
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.update_thumbnail(data);
+            thunkAPI.dispatch(setMessage(response.data.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
+export const update_image = createAsyncThunk(
+    "products/update_image",
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.update_image(data);
+            thunkAPI.dispatch(setMessage(response.data.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
+export const add_image = createAsyncThunk(
+    "products/add_image",
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.add_image(data);
+            thunkAPI.dispatch(setMessage(response.data.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
 export const delete_product = createAsyncThunk(
     "products/delete_product",
     async (id, thunkAPI) => {
