@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { add_product } from '../../store/slices/productSlice';
+import { get_all_categories } from '../../store/slices/categorySlice';
 import AddColorVariant from './component/AddColorVariant';
 
 
 function AddProductPage() {
-
     const dispatch = useDispatch();
+    const categories = useSelector((state) => state.categories.categories);
     const [productValues, setProductValues] = useState(
         {
             name: '',
@@ -16,6 +17,10 @@ function AddProductPage() {
             categoryId: '',
         },
     );
+
+    useEffect(() => {
+        dispatch(get_all_categories());
+    }, [])
 
     const [variantFormIsVisible, setTogleVariantForm] = useState(false);
 
@@ -33,6 +38,7 @@ function AddProductPage() {
             images: imageValues,
             sizeVariants: sizeValues,
         }
+        console.log(body)
         dispatch(add_product(body));
     }
 
@@ -45,10 +51,11 @@ function AddProductPage() {
                     <input onChange={onProductChange} name='keyword' type="text" placeholder='Keyword' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                     <input onChange={onProductChange} name='tag' type="text" placeholder='Tag' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                     <select onChange={onProductChange} name='categoryId' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
-                        <option value='658ec9157f2fab559b8a9658' className=''> Category 1</option>
-                        <option value='658ec9157f2fab559b8a9658' className=''> Category 1</option>
-                        <option value='658ec9157f2fab559b8a9658' className=''> Category 1</option>
-                        <option value='658ec9157f2fab559b8a9658' className=''> Category 1</option>
+                        {
+                            categories?.map((category) => {
+                                return <option key={category._id} value={category._id} className=''> {category.name}</option>
+                            })
+                        }
                     </select>
                 </form>
                 <div className='w-full m-2 p-6 border-[1px] border-slate-400 flex flex-col justify-start '>

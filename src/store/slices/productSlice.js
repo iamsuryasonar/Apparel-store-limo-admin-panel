@@ -54,6 +54,31 @@ export const add_product = createAsyncThunk(
     }
 );
 
+export const toggleIsPublished = createAsyncThunk(
+    "products/toggleIsPublished",
+    async (productId, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await productServices.toggleIsPublished(productId);
+            thunkAPI.dispatch(setMessage(response.message));
+            return response.data;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+);
 export const add_color_and_its_size_variant = createAsyncThunk(
     "products/add_color_size_variant",
     async (body, thunkAPI) => {

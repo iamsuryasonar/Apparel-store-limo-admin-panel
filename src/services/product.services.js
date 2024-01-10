@@ -3,6 +3,7 @@ import { LOCAL_STORAGE_NAME, API_URL } from '../common/constants'
 
 const getheaders = () => {
     const headers = {
+        "Accept": "*/*",
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME)).accessToken}`,
     }
@@ -17,8 +18,14 @@ const getMultipartheaders = () => {
     }
     return { headers }
 }
-const getAllProducts = async (pagination_info) => {
 
+const getAllCategories = async () => {
+    const response = await axios
+        .get(API_URL + 'category/', { headers: getheaders() })
+    return response.data
+}
+
+const getAllProducts = async (pagination_info) => {
     const response = await axios
         .get(API_URL + 'product/', {
             params: {
@@ -28,11 +35,13 @@ const getAllProducts = async (pagination_info) => {
         },)
     return response.data
 }
+
 const getAProduct = async (id) => {
     const response = await axios
         .get(API_URL + 'product/' + id, getheaders())
     return response.data
 }
+
 const getProductsByCategory = async (id) => {
     const response = await axios
         .get(API_URL + 'product/category/' + id, getheaders())
@@ -47,7 +56,7 @@ const addProduct = async (data) => {
     formData.append("description", data.product.description);
     formData.append("keyword", data.product.keyword);
     formData.append("tag", data.product.tag);
-    formData.append("category", data.product.category);
+    formData.append("categoryId", data.product.categoryId);
     //color Variant name and thumbnail
     formData.append("colorVariantName", data.colorVariant.name);
     formData.append("colorVariantThumbnail", data.colorVariant.thumbnail);
@@ -93,6 +102,14 @@ const add_color_size_variant = async (data) => {
     return response.data
 }
 
+const toggleIsPublished = async (productId) => {
+    const response = await axios
+        .put(
+            API_URL + 'product/toggleIsPublished/' + productId, {}, { headers: getheaders() }
+        )
+    return response.data
+}
+
 const update_thumbnail = async (data) => {
     const formData = new FormData();
 
@@ -105,6 +122,7 @@ const update_thumbnail = async (data) => {
         )
     return response.data
 }
+
 const update_image = async (data) => {
     const formData = new FormData();
 
@@ -117,6 +135,7 @@ const update_image = async (data) => {
         )
     return response.data
 }
+
 const add_image = async (data) => {
     const formData = new FormData();
 
@@ -138,7 +157,7 @@ const update_product_info = async (data) => {
     formData.append("description", data.product.description);
     formData.append("keyword", data.product.keyword);
     formData.append("tag", data.product.tag);
-    formData.append("category", data.product.category);
+    formData.append("categoryId", data.product.categoryId);
 
     const response = await axios
         .put(
@@ -191,6 +210,7 @@ const deleteProduct = async (id) => {
 
 const productServices = {
     getAProduct,
+    toggleIsPublished,
     getAllProducts,
     getProductsByCategory,
     addProduct,
@@ -201,7 +221,8 @@ const productServices = {
     update_size_variant,
     update_thumbnail,
     add_image,
-    update_image
+    update_image,
+    getAllCategories,
 }
 
 export default productServices;

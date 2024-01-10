@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image } from '../../../store/slices/productSlice';
+import { toggleIsPublished, add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image } from '../../../store/slices/productSlice';
 import { faBars, faXmark, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddColorVariant from './AddColorVariant'
@@ -38,6 +38,10 @@ function EditProduct({ onEditToggle, product, categories }) {
             ...productValues,
             [e.target.name]: e.target.value,
         })
+    }
+
+    const toggleIsPublishHandler = () => {
+        if (product) dispatch(toggleIsPublished(product?._id));
     }
 
     const onSizeChange = (e) => {
@@ -130,7 +134,10 @@ function EditProduct({ onEditToggle, product, categories }) {
                                 })}
                             </select>
                         </form>
-                        <button onClick={updateProductInfoHandler} className='place-self-end py-2 px-4 bg-green-300 rounded-md'>Update</button>
+                        <div className='w-full flex flex-row justify-between '>
+                            <button onClick={toggleIsPublishHandler} className='place-self-end py-2 px-4 bg-green-300 rounded-md'>{product.isPublished ? 'Unpublish' : 'Publish'}</button>
+                            <button onClick={updateProductInfoHandler} className='place-self-end py-2 px-4 bg-green-300 rounded-md'>Update</button>
+                        </div>
                     </div>
                     <div className='w-full h-[1px] my-2 bg-slate-300'></div>
                     <p className='self-start' >Color Variant:</p>

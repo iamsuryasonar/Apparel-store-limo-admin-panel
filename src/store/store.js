@@ -3,6 +3,8 @@ import authReducer from './slices/authSlice';
 import messageReducer from './slices/messageSlice';
 import loadingReducer from './slices/loadingSlice';
 import productsReducer from './slices/productSlice';
+import categoriesReducer from './slices/categorySlice';
+
 import { initialiseUser } from './slices/authSlice';
 
 export const store = configureStore({
@@ -11,6 +13,7 @@ export const store = configureStore({
         message: messageReducer,
         loading: loadingReducer,
         products: productsReducer,
+        categories: categoriesReducer,
     },
 });
 
