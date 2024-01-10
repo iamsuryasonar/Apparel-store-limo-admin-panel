@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image } from '../../../store/slices/productSlice';
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddColorVariant from './AddColorVariant'
 
@@ -10,13 +10,9 @@ function EditProduct({ onEditToggle, product, categories }) {
     const dispatch = useDispatch();
     const [showColorVariant, setShowColorVariant] = useState(true);
     const [showColorVariantForm, setShowColorVariantForm] = useState(false)
-    const [showImageInputField, setShowImageInputField] = useState(false)
-    const [showThumbnailInputField, setShowThumbnailInputField] = useState(false)
     const [showUpdateButton, setShowUpdateButton] = useState(false)
     const [selectedColorVariant, setSelectedColorVariant] = useState(0);
-    const [showAddImageInputField, setShowAddImageInputField] = useState(false)
     const [openedSizeEditForm, setOpenedSizeEditForm] = useState(null)
-    const [imageValue, setImageValue] = useState();
     const [productValues, setProductValues] = useState(
         {
             name: product?.name || '',
@@ -44,9 +40,6 @@ function EditProduct({ onEditToggle, product, categories }) {
         })
     }
 
-    let onImageChange = (file) => {
-        setImageValue({ image: file });
-    };
     const onSizeChange = (e) => {
         setSizeValues({
             ...sizeValues,
@@ -59,10 +52,9 @@ function EditProduct({ onEditToggle, product, categories }) {
         setShowUpdateButton(!showUpdateButton)
     }
 
-
-    const addImageHandler = (colorVariantId) => {
+    const addImageHandler = (colorVariantId, file) => {
         if (colorVariantId) {
-            dispatch(add_image({ colorVariantId, image: imageValue.image }));
+            dispatch(add_image({ colorVariantId, image: file }));
         }
     }
 
@@ -80,6 +72,7 @@ function EditProduct({ onEditToggle, product, categories }) {
             console.log('product id not found!!')
         }
     }
+
     const sizeVariantUpdateHandler = (id) => {
         let data = {
             sizeVariant: sizeValues,
@@ -92,13 +85,13 @@ function EditProduct({ onEditToggle, product, categories }) {
             console.log('product id not found!!')
         }
     };
+
     let updateProductInfoHandler = () => {
         let data = {
             product: productValues,
             productId: product?.id
         }
         if (product?.id) {
-
             dispatch(update_product_info(data));
         }
         else {
@@ -106,19 +99,16 @@ function EditProduct({ onEditToggle, product, categories }) {
         }
     }
 
-    const updateThumbnailHandler = (thumbnailPath, colorVariantId) => {
-
+    const updateThumbnailHandler = (thumbnailPath, colorVariantId, file) => {
         if (thumbnailPath) {
-            dispatch(update_thumbnail({ thumbnailPath, colorVariantId, image: imageValue.image }));
+            dispatch(update_thumbnail({ thumbnailPath, colorVariantId, image: file }));
         }
     }
-    const updateImageHandler = (path, imageId) => {
+    const updateImageHandler = (path, imageId, file) => {
         if (path) {
-            dispatch(update_image({ path, imageId, image: imageValue.image }));
+            dispatch(update_image({ path, imageId, image: file }));
         }
     }
-
-
 
     return (
         <div className='w-full p-6 grid place-content-center'>
@@ -161,54 +151,36 @@ function EditProduct({ onEditToggle, product, categories }) {
 
                             <p>Color thumbnail:</p>
                             <div className='w-full h-[1px] my-2 bg-slate-300'></div>
+                            <label htmlFor="thumbnail-update" className='relative cursor-pointer'>
+                                <img htmlFor="thumbnail-update" src={product?.colorvariants[selectedColorVariant]?.thumbnail.url} className='absolute w-40 h-40' />
+                                <input id='thumbnail-update' type="file" onChange={(e) => updateThumbnailHandler(product?.colorvariants[selectedColorVariant]?.thumbnail.filename, product?.colorvariants[selectedColorVariant]?._id, e.target.files[0])} accept="image/*" className='hidden' />
+                                <div className='w-40 h-40 grid bg-black opacity-0 hover:opacity-20 text-white place-content-center text-5xl'><FontAwesomeIcon icon={faPenToSquare} /></div>
+                            </label>
 
-                            <div className='w-40 h-40 relative border-[1px]'>
-                                <img className={``} src={product?.colorvariants[selectedColorVariant]?.thumbnail.url}></img>
-                                <button onClick={() => { setShowThumbnailInputField(!showThumbnailInputField) }} className='absolute top-2 right-2 py-2 px-4 bg-green-300 rounded-md'>Edit</button>
-                            </div>
-                            {showThumbnailInputField &&
-                                <div className='flex  gap-2'>
-                                    <input onChange={e => onImageChange(e.target.files[0])} type="file" accept='image/*' placeholder='image' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
-                                    <button onClick={() => { setShowImageInputField(!showImageInputField); updateThumbnailHandler(product?.colorvariants[selectedColorVariant]?.thumbnail.filename, product?.colorvariants[selectedColorVariant]?._id) }} className='py-2 px-4 bg-green-300 rounded-md'>Update</button>
-                                </div>
-                            }
                             <div className='w-full h-[1px] my-2 bg-slate-300'></div>
                             <p>Product images:</p>
                             <div className='w-full h-[1px] my-2 bg-slate-300'></div>
-                            <div className='w-full h-full grid grid-col-2 gap-4 '>
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 '>
                                 {
                                     product?.colorvariants[selectedColorVariant].images.map((image) => {
-                                        return <>
-                                            <label htmlFor="image-upload" className='aspect-square w-full relative cursor-pointer border-2 border-red-400'>
-                                                <img htmlFor="image-upload" src={image?.url} className='absolute w-full' />
-                                                <input id='image-upload' type="file" name='file' onChange={() => updateImageHandler(image?.filename, image?._id)} accept="image/*" className='hidden' />
+                                        return (
+                                            <label htmlFor="image-update" key={image._id} className='aspect-square relative cursor-pointer'>
+                                                <img htmlFor="image-update" src={image?.url} className='absolute  inset-0' />
+                                                <input id='image-update' type="file" onChange={(e) => updateImageHandler(image?.filename, image?._id, e.target.files[0])} accept="image/*" className='hidden' />
+                                                <div className='w-full h-full grid bg-black opacity-0 hover:opacity-20 text-white place-content-center text-5xl'><FontAwesomeIcon icon={faPenToSquare} /></div>
                                             </label>
-                                            {/* <div className='relative border-[1px]'>
-                                                <img className='' src={image?.url}></img>
-                                                <button onClick={() => { setShowImageInputField(!showImageInputField) }} className='absolute top-2 right-2 py-2 px-4 bg-green-300 rounded-md'>Edit</button>
-                                            </div> */}
-
-                                            {/* todo: ui needs to be fixed */}
-                                            {/* {showImageInputField &&
-                                                <div>
-                                                    <input onChange={e => onImageChange(e.target.files[0])} type="file" accept='image/*' placeholder='image' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
-                                                    <button onClick={() => { setShowImageInputField(!showImageInputField); updateImageHandler(image?.filename, image?._id) }} className='py-2 px-4 bg-green-300 rounded-md'>Update</button>
-                                                </div>
-                                            } */}
-                                        </>
+                                        )
                                     })
                                 }
-                                <div className='bg-slate-200 grid place-content-center'>
-                                    <button onClick={() => { setShowAddImageInputField(!showAddImageInputField) }} className='py-2 px-6 text-4xl bg-green-500 '>+</button>
-                                </div>
-
+                                {
+                                    product?.colorvariants[selectedColorVariant].images.length < 4 && (
+                                        <label htmlFor="image-upload" className='aspect-square relative cursor-pointer bg-slate-100 hover:bg-slate-300 grid'>
+                                            <p htmlFor="image-upload" className='absolute place-self-center text-5xl text-black hover:text-green-500'>+</p>
+                                            <input id='image-upload' type="file" onChange={(e) => addImageHandler(product?.colorvariants[selectedColorVariant]._id, e.target.files[0])} accept="image/*" className='hidden' />
+                                        </label>
+                                    )
+                                }
                             </div>
-                            {
-                                showAddImageInputField && <div className='w-full flex gap-2'>
-                                    <input onChange={e => onImageChange(e.target.files[0])} type="file" accept='image/*' placeholder='image' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
-                                    <button onClick={() => { setShowAddImageInputField(!showAddImageInputField); addImageHandler(product?.colorvariants[selectedColorVariant]._id) }} className='py-2 px-4 bg-green-300 rounded-md'>Add</button>
-                                </div>
-                            }
                             <div className='w-full h-[1px] my-2 bg-slate-300'></div>
                             <p>Size variants:</p>
                             <div className='w-full h-[1px] my-2 bg-slate-300'></div>
@@ -333,3 +305,6 @@ function AddSizeComponent() {
         </button>
     </div>
 }
+
+
+
