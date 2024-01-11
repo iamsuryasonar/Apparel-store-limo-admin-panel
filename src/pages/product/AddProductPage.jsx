@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { add_product } from '../../store/slices/productSlice';
+import { add_product } from '../../store/slices/productsSlice';
 import { get_all_categories } from '../../store/slices/categorySlice';
 import AddColorVariant from './component/AddColorVariant';
-
 
 function AddProductPage() {
     const dispatch = useDispatch();

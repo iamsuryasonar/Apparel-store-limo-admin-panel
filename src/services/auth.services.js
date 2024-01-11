@@ -14,7 +14,7 @@ const register = (creds) => {
 
 const login = async (creds) => {
     const response = await axios.post(API_URL + 'auth/adminLogin', creds);
-    return response.data.data;
+    return response.data.results;
 }
 
 const logout = () => {

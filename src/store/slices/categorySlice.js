@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage, clearMessage } from "./messageSlice";
-import productServices from "../../services/product.services";
+import productsServices from "../../services/products.services";
 import { setLoading } from "./loadingSlice";
 
 
@@ -9,7 +9,7 @@ export const get_all_categories = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             thunkAPI.dispatch(setLoading(true));
-            const response = await productServices.getAllCategories();
+            const response = await productsServices.getAllCategories();
             return response.categories;
         } catch (error) {
             const message =

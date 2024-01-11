@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearMessage } from '../../../store/slices/messageSlice';
-import { get_all_products } from '../../../store/slices/productSlice';
+import { get_all_products } from '../../../store/slices/productsSlice';
 
 const columns = [
     {

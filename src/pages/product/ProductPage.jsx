@@ -14,7 +14,7 @@ function ProductPage() {
         if (product) {
             setProduct(product);
         }
-        console.log(categories)
+
         if (categories) {
             setCategories(categories)
         }
@@ -23,7 +23,7 @@ function ProductPage() {
 
     return (
         <>
-            {editProductToggle ? (<EditProduct onEditToggle={onEditToggle} product={product} categories={categories} />) : (
+            {editProductToggle ? (<EditProduct onEditToggle={onEditToggle} categories={categories} productId={product._id} />) : (
                 <div className=''>
                     <ProductDataTable onEditToggle={onEditToggle} />
                 </div>
