@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { add_product } from '../../store/slices/productsSlice';
 import { get_all_categories } from '../../store/slices/categorySlice';
 import AddColorVariant from './component/AddColorVariant';
+import { useNavigate } from 'react-router-dom'
 
 function AddProductPage() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const categories = useSelector((state) => state.categories.categories);
     const [productValues, setProductValues] = useState(
         {
@@ -38,7 +40,9 @@ function AddProductPage() {
             sizeVariants: sizeValues,
         }
         console.log(body)
-        dispatch(add_product(body));
+        dispatch(add_product(body)).then(() => [
+            navigate('/products')
+        ]);
     }
 
     return (
@@ -50,6 +54,7 @@ function AddProductPage() {
                     <input onChange={onProductChange} name='keyword' type="text" placeholder='Keyword' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                     <input onChange={onProductChange} name='tag' type="text" placeholder='Tag' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                     <select onChange={onProductChange} name='categoryId' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
+                        <option value='' className=''>SELECT...</option>
                         {
                             categories?.map((category) => {
                                 return <option key={category._id} value={category._id} className=''> {category.name}</option>

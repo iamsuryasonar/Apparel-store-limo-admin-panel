@@ -64,10 +64,10 @@ function EditProduct({ onEditToggle, categories, productId }) {
         if (product) dispatch(toggleIsPublished(product?._id));
     }
 
-    const onSizeChange = (e) => {
+    const onSizeChange = (index, name, value) => {
         setSizeValues({
             ...sizeValues,
-            [e.target.name]: e.target.value,
+            [name]: value,
         })
     }
 
@@ -203,8 +203,8 @@ function EditProduct({ onEditToggle, categories, productId }) {
                                     {
                                         product?.colorvariants[selectedColorVariant].images.map((image) => {
                                             return (
-                                                <label htmlFor={image._id} key={image._id} className='aspect-square relative cursor-pointer'>
-                                                    <img htmlFor={image._id} src={image?.url} className='absolute  inset-0' />
+                                                <label htmlFor={image._id} key={image._id} className='w-full h-full aspect-square relative cursor-pointer'>
+                                                    <img htmlFor={image._id} src={image?.url} className='absolute w-full h-full object-cover' />
                                                     <input id={image._id} type="file" onChange={(e) => updateImageHandler(image?.filename, image?._id, e.target.files[0])} accept="image/*" className='hidden' />
                                                     <div className='w-full h-full grid bg-black opacity-0 hover:opacity-20 text-white place-content-center text-5xl'><FontAwesomeIcon icon={faPenToSquare} /></div>
                                                 </label>
