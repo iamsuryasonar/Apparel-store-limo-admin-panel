@@ -11,6 +11,9 @@ const Navbar = () => {
     const user = useSelector((state) => state.auth.userData);
     const dispatch = useDispatch();
 
+    const currentPageName = window.location.pathname;
+    console.log(currentPageName)
+
     const toggle = () => {
         setMenu(!menu);
     };
@@ -62,10 +65,10 @@ const Navbar = () => {
                 {
                     user ?
                         authNavItems.map((item) => {
-                            return <a key={item.id} href={item.path} className="text-base hover:text-blue-600 hover:underline underline-offset-4 ">{item.title}</a>
+                            return <Link key={item.id} to={item.path} className={`text-base hover:text-blue-600 hover:underline underline-offset-4 ${currentPageName === item.path ? 'text-blue-600' : ''}`}>{item.title}</Link>
                         }) :
                         navItems.map((item) => {
-                            return <a key={item.id} href={item.path} className="text-base hover:text-blue-600 hover:underline underline-offset-4 ">{item.title}</a>
+                            return <Link key={item.id} to={item.path} className={`text-base hover:text-blue-600 hover:underline underline-offset-4 ${currentPageName === item.path ? 'text-blue-600' : ''}`}>{item.title}</Link>
                         })
                 }
                 {
@@ -83,10 +86,10 @@ const Navbar = () => {
             {
                 user ?
                     authNavItems.map((item) => {
-                        return <a key={item.id} href={item.path} onClick={() => toggle()} className="text-2xl hover:scale-150 transition-all duration-300 ease-in-out ">{item.title} </a>
+                        return <Link key={item.id} to={item.path} onClick={() => toggle()} className={`text-2xl hover:scale-150 transition-all duration-300 ease-in-out ${currentPageName === item.path ? 'text-blue-600' : ''}`}>{item.title} </Link>
                     }) :
                     navItems.map((item) => {
-                        return <a key={item.id} href={item.path} onClick={() => toggle()} className="text-2xl hover:scale-150 transition-all duration-300 ease-in-out ">{item.title} </a>
+                        return <Link key={item.id} to={item.path} onClick={() => toggle()} className={`text-2xl hover:scale-150 transition-all duration-300 ease-in-out  ${currentPageName === item.path ? 'text-blue-600' : ''}`}>{item.title} </Link>
                     })
             }
             {

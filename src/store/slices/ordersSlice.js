@@ -10,7 +10,8 @@ export const get_all_orders = createAsyncThunk(
             thunkAPI.dispatch(setLoading(true));
             const response = await ordersServices.getAllOrders();
             thunkAPI.dispatch(setMessage(response.message));
-            return response.results.orders;
+
+            return response.results;
         } catch (error) {
             const message =
                 (error.response &&

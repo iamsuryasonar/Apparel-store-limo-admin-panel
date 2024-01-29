@@ -14,12 +14,11 @@ function OrdersPage() {
         <div className='w-full p-6'>
             <div className="w-full p-2 flex flex-col justify-center items-center border-[1px] border-black">
                 {
-                    orders?.map((item) => {
-                        return <div>
-                            {console.log(item)}
+                    orders?.orders?.map((item) => {
+                        return <div key={item._id}>
                             <div className='flex flex-row gap-2'>
                                 {item.item.colorvariant.images?.map((image) => {
-                                    return <img className='w-20 h-20' src={image.url} />
+                                    return <img key={image._id} className='w-20 h-20' src={image.url} />
                                 })}
                             </div>
                             <img className='w-10 h-10 rounded-full m-2' src={item.item.colorvariant.thumbnail.url} />

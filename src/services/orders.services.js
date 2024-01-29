@@ -22,6 +22,7 @@ const getMultipartheaders = () => {
 const getAllOrders = async () => {
     const response = await axios
         .get(API_URL + 'order/', { headers: getheaders() })
+
     return response.data
 }
 
