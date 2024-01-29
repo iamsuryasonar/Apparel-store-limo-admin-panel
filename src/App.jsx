@@ -10,10 +10,11 @@ import LogInPage from './pages/LogInPage'
 import ProductPage from './pages/product/ProductPage'
 import RegisterPage from './pages/RegisterPage'
 import AddProductPage from './pages/product/AddProductPage'
+import CategoryPage from './pages/CategoryPage'
 import PrivateRoute from './components/auth_guards/private_route'
 import PublicRoute from './components/auth_guards/public_route'
-
 import { useSelector } from "react-redux";
+import OrdersPage from './pages/OrdersPage'
 
 function App() {
 
@@ -31,6 +32,8 @@ function App() {
           <Route path='/dashboard' element={<DashboardPage />}></Route>
           <Route path='/products' element={<ProductPage />}></Route>
           <Route path='/add-product' element={<AddProductPage />}></Route>
+          <Route path='/category' element={<CategoryPage />}></Route>
+          <Route path='/orders' element={<OrdersPage />}></Route>
         </Route>
       </Route>
     </Routes>

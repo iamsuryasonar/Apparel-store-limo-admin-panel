@@ -100,29 +100,31 @@ export const login = createAsyncThunk(
     }
 );
 
-export const logout = createAsyncThunk("auth/logout", async () => {
-    try {
-        await AuthServices.logout();
-        return;
-    } catch (error) {
-        const message =
-            (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-            error.message ||
-            error.toString();
-        thunkAPI.dispatch(setMessage(message));
-        return thunkAPI.rejectWithValue();
-    } finally {
-        setTimeout(() => {
-            thunkAPI.dispatch(clearMessage());
-        }, 3000);
-        thunkAPI.dispatch(setLoading(false));
+
+export const logout = createAsyncThunk(
+    "auth/logout",
+    async (creds, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            AuthServices.logout();
+            return;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
     }
-});
-
-
-
+);
 
 const initialState = {
     userData: null,

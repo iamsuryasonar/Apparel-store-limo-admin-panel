@@ -5,6 +5,7 @@ import loadingReducer from './slices/loadingSlice';
 import productReducer from './slices/productSlice';
 import productsReducer from './slices/productsSlice';
 import categoriesReducer from './slices/categorySlice';
+import ordersReducer from './slices/ordersSlice';
 
 import { initialiseUser } from './slices/authSlice';
 
@@ -16,6 +17,7 @@ export const store = configureStore({
         product: productReducer,
         products: productsReducer,
         categories: categoriesReducer,
+        orders: ordersReducer,
     },
 });
 
