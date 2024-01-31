@@ -76,7 +76,7 @@ function CategoryPage() {
                     </button>
                     <div className='w-full h-[1px] bg-slate-400'></div>
                     <p className='p-4 self-start text-xl font-semibold' >
-                        Add Category
+                        All Category
                     </p>
                     <div className='w-full h-[1px] bg-slate-400'></div>
                     <div className='w-full flex flex-col justify-between gap-2'>
@@ -107,7 +107,7 @@ function CategoryPage() {
                                         <div>
                                             <div className='w-full h-[1px] bg-slate-400 my-2'></div>
                                             <div className='w-full'>
-                                                <form className="w-full flex flex-col gap-6 font-light ">
+                                                <form className="w-full flex flex-col gap-6 font-light">
                                                     <input onChange={onUpdatedNameChange} value={updatedName} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                                                     <input onChange={e => onUpdatedImageChange(e.target.files[0])} name='image' type="file" accept='image/*' placeholder='image' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
                                                     <select onChange={(e) => { setCategoryStatus(e.target.value) }} value={categoryStatus} className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2'>

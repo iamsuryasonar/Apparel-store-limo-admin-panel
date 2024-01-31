@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,9 +9,9 @@ const Navbar = () => {
     const [menu, setMenu] = useState(false);
     const user = useSelector((state) => state.auth.userData);
     const dispatch = useDispatch();
+    const location = useLocation();
 
-    const currentPageName = window.location.pathname;
-    console.log(currentPageName)
+    const currentPageName = location.pathname;
 
     const toggle = () => {
         setMenu(!menu);
@@ -74,7 +73,7 @@ const Navbar = () => {
                 {
                     user &&
                     <button onClick={logOutHandler}
-                        className='p-4 rounded-xl bg-slate-500 flex justify-center items-center text-white font-bold'>
+                        className='p-2 rounded-xl bg-slate-500 flex justify-center items-center text-white font-bold'>
                         Log Out
                     </button>
                 }

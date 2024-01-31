@@ -19,15 +19,28 @@ const getMultipartheaders = () => {
     return { headers }
 }
 
-const getAllOrders = async () => {
+const getAllOrders = async (data) => {
     const response = await axios
-        .get(API_URL + 'order/', { headers: getheaders() })
-
+        .get(API_URL + 'order/', {
+            params: {
+                page: data.pageNo,
+                limit: data.limit,
+            }, headers: getheaders()
+        },)
     return response.data
+}
+
+const updateOrderStatus = async (data) => {
+    const response = await axios
+        .put(
+            API_URL + 'order/' + data.id, { status: data.status }, { headers: getheaders() }
+        )
+    return response.data.results
 }
 
 const ordersServices = {
     getAllOrders,
+    updateOrderStatus
 }
 
 export default ordersServices;

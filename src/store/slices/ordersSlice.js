@@ -5,12 +5,37 @@ import { setLoading } from "./loadingSlice";
 
 export const get_all_orders = createAsyncThunk(
     "orders/get_all_orders",
-    async (id, thunkAPI) => {
+    async (data, thunkAPI) => {
         try {
             thunkAPI.dispatch(setLoading(true));
-            const response = await ordersServices.getAllOrders();
+            const response = await ordersServices.getAllOrders(data);
             thunkAPI.dispatch(setMessage(response.message));
+            return response.results;
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        } finally {
+            setTimeout(() => {
+                thunkAPI.dispatch(clearMessage());
+            }, 3000);
+            thunkAPI.dispatch(setLoading(false));
+        }
+    }
+)
 
+
+export const update_order_status = createAsyncThunk(
+    "orders/update_order_status",
+    async (data, thunkAPI) => {
+        try {
+            thunkAPI.dispatch(setLoading(true));
+            const response = await ordersServices.updateOrderStatus(data);
             return response.results;
         } catch (error) {
             const message =
