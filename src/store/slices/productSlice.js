@@ -10,7 +10,6 @@ export const get_a_product = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.get_a_product(id);
-            thunkAPI.dispatch(setMessage(response.message));
             return response.results.product;
         } catch (error) {
             const message =
@@ -36,7 +35,6 @@ export const toggleIsPublished = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.toggleIsPublished(productId);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
@@ -63,7 +61,6 @@ export const add_color_and_its_size_variant = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.add_color_size_variant(body);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(body.productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
@@ -90,7 +87,6 @@ export const update_product_info = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.update_product_info(data);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(data.productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
@@ -118,7 +114,6 @@ export const add_size_variant = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.add_size_variant(data);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(data.productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
@@ -145,7 +140,6 @@ export const update_size_variant = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.update_size_variant(data);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(data.productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
@@ -173,7 +167,6 @@ export const update_thumbnail = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.update_thumbnail(data);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(data.productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
@@ -200,7 +193,6 @@ export const update_image = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.update_image(data);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(data.productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
@@ -227,7 +219,6 @@ export const add_image = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productServices.add_image(data);
-            thunkAPI.dispatch(setMessage(response.message));
             thunkAPI.dispatch(get_a_product(data.productId));
             thunkAPI.dispatch(get_all_products());
             return response.results.product;

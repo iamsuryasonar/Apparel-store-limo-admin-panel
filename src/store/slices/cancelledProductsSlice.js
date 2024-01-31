@@ -9,7 +9,6 @@ export const get_all_cancelled_products = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await ordersServices.getAllCancelledOrders(data);
-            thunkAPI.dispatch(setMessage(response.message));
             return response.results;
         } catch (error) {
             const message =

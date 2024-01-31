@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_an_order, update_order_status, clearOrder } from '../../../store/slices/orderSlice'
+import { clearMessage } from '../../../store/slices/messageSlice'
 import Carousal from '../../../components/Carousal'
 import { ORDERSTATUS } from '../../../common/constants'
+import BottomAlert from '../../../components/BottomAlert'
+
 function SearchOrdersComponent() {
     const dispatch = useDispatch();
     const order = useSelector((state) => state.order.order);
+    const message = useSelector((state) => state.message.message);
     const [id, setId] = useState('');
     const [orderStatus, setOrderStatus] = useState('');
 
@@ -23,12 +27,14 @@ function SearchOrdersComponent() {
     }
 
     useEffect(() => {
+        dispatch(clearMessage())
         dispatch(clearOrder());
     }, [])
 
     return <div>
+        {message && <BottomAlert message={message} />}
         <div className="flex flex-row gap-2">
-            <input onChange={(e) => { setId(e.target.value) }} name='id' type="text" placeholder='Id' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
+            <input onChange={(e) => { setId(e.target.value) }} name='id' type="text" placeholder='Product id' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
             <button
                 onClick={
                     onSearchHandler

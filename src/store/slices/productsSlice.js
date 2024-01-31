@@ -58,7 +58,6 @@ export const add_product = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.addProduct(product);
-            thunkAPI.dispatch(setMessage(response.message));
             return response.data;
         } catch (error) {
             const message =
@@ -84,7 +83,6 @@ export const toggleIsPublished = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.toggleIsPublished(productId);
-            thunkAPI.dispatch(setMessage(response.message));
             return response.data;
         } catch (error) {
             const message =
@@ -109,7 +107,6 @@ export const add_color_and_its_size_variant = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.add_color_size_variant(body);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =
@@ -134,7 +131,6 @@ export const update_product_info = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.update_product_info(data);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =
@@ -160,7 +156,6 @@ export const add_size_variant = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.add_size_variant(data);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =
@@ -185,7 +180,6 @@ export const update_size_variant = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.update_size_variant(data);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =
@@ -211,7 +205,6 @@ export const update_thumbnail = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.update_thumbnail(data);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =
@@ -236,7 +229,6 @@ export const update_image = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.update_image(data);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =
@@ -261,7 +253,6 @@ export const add_image = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.add_image(data);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =
@@ -286,7 +277,6 @@ export const delete_product = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await productsServices.deleteProduct(id);
-            thunkAPI.dispatch(setMessage(response.data.message));
             return response.data;
         } catch (error) {
             const message =

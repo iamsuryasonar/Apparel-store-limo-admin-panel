@@ -9,7 +9,6 @@ export const get_all_transit_products = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await ordersServices.getAllTransitOrders(data);
-            thunkAPI.dispatch(setMessage(response.message));
             return response.results;
         } catch (error) {
             const message =
