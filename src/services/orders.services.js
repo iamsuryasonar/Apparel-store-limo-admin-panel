@@ -19,6 +19,15 @@ const getMultipartheaders = () => {
     return { headers }
 }
 
+const getAnOrder = async (id) => {
+    const response = await axios
+        .get(API_URL + 'order/get_product_by_id/' + id, {
+            headers: getheaders()
+        },)
+    return response.data
+}
+
+
 const getAllOrders = async (data) => {
     const response = await axios
         .get(API_URL + 'order/', {
@@ -30,6 +39,63 @@ const getAllOrders = async (data) => {
     return response.data
 }
 
+const getAllProcessedOrders = async (data) => {
+    const response = await axios
+        .get(API_URL + 'order/processed', {
+            params: {
+                page: data.pageNo,
+                limit: data.limit,
+            }, headers: getheaders()
+        },)
+    return response.data
+}
+
+const getAllCancelledOrders = async (data) => {
+    const response = await axios
+        .get(API_URL + 'order/cancelled', {
+            params: {
+                page: data.pageNo,
+                limit: data.limit,
+            }, headers: getheaders()
+        },)
+    return response.data
+}
+
+const getAllOrderedOrders = async (data) => {
+
+    const response = await axios
+        .get(API_URL + 'order/ordered', {
+            params: {
+                page: data.pageNo,
+                limit: data.limit,
+            }, headers: getheaders()
+        },)
+    return response.data
+}
+
+const getAllDeliveredOrders = async (data) => {
+    const response = await axios
+        .get(API_URL + 'order/delivered', {
+            params: {
+                page: data.pageNo,
+                limit: data.limit,
+            }, headers: getheaders()
+        },)
+    return response.data
+}
+
+const getAllTransitOrders = async (data) => {
+    const response = await axios
+        .get(API_URL + 'order/transit', {
+            params: {
+                page: data.pageNo,
+                limit: data.limit,
+            }, headers: getheaders()
+        },)
+    return response.data
+}
+
+
 const updateOrderStatus = async (data) => {
     const response = await axios
         .put(
@@ -40,7 +106,13 @@ const updateOrderStatus = async (data) => {
 
 const ordersServices = {
     getAllOrders,
-    updateOrderStatus
+    updateOrderStatus,
+    getAllOrderedOrders,
+    getAllProcessedOrders,
+    getAllCancelledOrders,
+    getAllDeliveredOrders,
+    getAllTransitOrders,
+    getAnOrder,
 }
 
 export default ordersServices;

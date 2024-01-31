@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { get_all_orders, update_order_status } from "../store/slices/ordersSlice";
-import Carousal from '../components/Carousal'
-import { ORDERSTATUS } from '../common/constants'
+import { get_all_transit_products, update_order_status } from "../../../store/slices/transitProductsSlice";
+import Carousal from '../../../components/Carousal'
+import { ORDERSTATUS } from '../../../common/constants'
+import Pagination from '../../../components/Pagination'
 
-function OrdersPage() {
+function TransitOrdersComponent() {
     const dispatch = useDispatch();
-    const orders = useSelector((state) => state.orders.orders);
-
+    const orders = useSelector((state) => state.transit.transit);
     const [modalItem, setModalItem] = useState(null);
     const [modalVisible, setModalVisibility] = useState(false);
     const [orderStatus, setOrderStatus] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
 
     const fetchOrdersData = async (pageNo) => {
-        dispatch(get_all_orders({ pageNo }));
+        dispatch(get_all_transit_products({ pageNo }));
     };
 
     useEffect(() => {
@@ -53,7 +53,7 @@ function OrdersPage() {
                                         setModalItem(item);
                                         setModalVisibility(!modalVisible);
                                     }
-                                } className='p-2 bg-green-500 hover:bg-green-600 text-white'>PROCESS</button>
+                                } className='p-2 bg-green-500 hover:bg-green-600 text-white rounded-md'>PROCESS</button>
                             </div>
                             <p>Name: {item.item.product.name}</p>
                             <div className='p-4 border-[1px] border-black flex flex-row justify-between'>
@@ -139,27 +139,9 @@ function OrdersPage() {
                 </div>
             }
             <div className='h-[1px] bg-slate-500 my-2'></div>
-
-            <div className='flex flex-row justify-end'>
-                <button
-                    className=' underline underline-offset-4 hover:text-blue-600'
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    Previous
-                </button>
-                <span className='px-4'>Page {currentPage} of {orders?.pagination.total_pages}</span>
-                <button
-                    className=' underline underline-offset-4 hover:text-blue-600'
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === orders?.pagination.total_pages}
-                >
-                    Next
-                </button>
-            </div>
+            <Pagination currentPage={currentPage} totalPages={orders?.pagination.total_pages} handlePageChange={handlePageChange} />
         </div>
     )
 }
 
-export default OrdersPage;
-
+export default TransitOrdersComponent;

@@ -3,12 +3,12 @@ import { setMessage, clearMessage } from "./messageSlice";
 import ordersServices from "../../services/orders.services";
 import { setLoading } from "./loadingSlice";
 
-export const get_all_orders = createAsyncThunk(
-    "orders/get_all_orders",
+export const get_all_ordered_products = createAsyncThunk(
+    "orders/get_all_ordered_products",
     async (data, thunkAPI) => {
         try {
             thunkAPI.dispatch(setLoading(true));
-            const response = await ordersServices.getAllOrders(data);
+            const response = await ordersServices.getAllOrderedOrders(data);
             thunkAPI.dispatch(setMessage(response.message));
             return response.results;
         } catch (error) {
@@ -54,20 +54,20 @@ export const update_order_status = createAsyncThunk(
     }
 )
 
-const initialState = { orders: null };
+const initialState = { ordered: null };
 
-const ordersSlice = createSlice({
-    name: "orders",
+const orderedProductsSlice = createSlice({
+    name: "ordered",
     initialState,
     extraReducers:
         (builder) => {
             builder
-                .addCase(get_all_orders.fulfilled, (state, action) => {
-                    state.orders = action.payload;
-                }).addCase(get_all_orders.rejected, (state, action) => {
+                .addCase(get_all_ordered_products.fulfilled, (state, action) => {
+                    state.ordered = action.payload;
+                }).addCase(get_all_ordered_products.rejected, (state, action) => {
                 })
         },
 });
 
-const { reducer } = ordersSlice;
+const { reducer } = orderedProductsSlice;
 export default reducer;

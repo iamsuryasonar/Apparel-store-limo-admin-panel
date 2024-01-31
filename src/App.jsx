@@ -14,7 +14,7 @@ import CategoryPage from './pages/CategoryPage'
 import PrivateRoute from './components/auth_guards/private_route'
 import PublicRoute from './components/auth_guards/public_route'
 import { useSelector } from "react-redux";
-import OrdersPage from './pages/OrdersPage'
+import OrdersPage from './pages/order/OrdersPage'
 
 function App() {
 
