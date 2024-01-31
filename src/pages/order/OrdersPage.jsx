@@ -41,7 +41,7 @@ function OrdersPage() {
     ]
 
     return <div className='w-full p-6 flex flex-col gap-4'>
-        <div className='flex flex-row justify-start gap-2'>
+        <div className='flex flex-col md:flex-row justify-start gap-2'>
             {
                 pages.map((item) => {
                     return <button key={item.id} onClick={
