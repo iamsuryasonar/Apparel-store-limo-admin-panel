@@ -12,26 +12,33 @@ const columns = [
         name: 'Name',
         selector: row => row.name,
         sortable: true,
+        maxWidth: '300px',
     },
     {
         name: 'Description',
         selector: row => row.description,
         sortable: true,
+        maxWidth: '400px',
     },
     {
         name: 'Keyword',
         selector: row => row.keyword,
         sortable: true,
+        maxWidth: '200px',
     },
     {
         name: 'Tag',
         selector: row => row.tag,
         sortable: true,
+        right: true,
+        maxWidth: '150px',
     },
     {
         name: 'Action',
         selector: row => row.action,
         sortable: true,
+        right: true,
+        maxWidth: '80px',
     },
 ];
 
@@ -67,13 +74,6 @@ function ProductDataTable({ onEditToggle }) {
         item => item.name && item.name.toLowerCase().includes(value.toLowerCase()),
     );
 
-    function addProduct() {
-        //add product to db and update this component
-    }
-
-
-
-
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (value) {
@@ -84,17 +84,16 @@ function ProductDataTable({ onEditToggle }) {
 
 
         return (
-            <div className='w-full flex justify-between items-center'>
-                <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md' onClick={addProduct}>Add product</Link>
-                <div>
+            <div className='w-full flex justify-between items-center gap-2'>
+                <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md'>Add product</Link>
+                <div className='flex flex-col md:flex-row gap-2'>
                     <input
                         id="search"
-                        className='border-2 px-2 m-2'
+                        className='border-2 px-2 '
                         type="text"
                         placeholder="Filter by product name"
                         value={value}
                         onChange={e => setValue(e.target.value)}>
-
                     </input>
                     <button className='px-2 py-1 bg-green-400 rounded-md' onClick={handleClear} > Clear</button >
                 </div>
@@ -104,7 +103,7 @@ function ProductDataTable({ onEditToggle }) {
 
     return (
         <>
-            <div className=' w-full flex flex-col'>
+            <div className=' w-full flex flex-col p-4'>
                 {loading ? (
                     <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center  bg-opacity-90 z-50">
                         <div className="animate-spin border-t-8 border-blue-500 border-solid rounded-full w-16 h-16"></div>

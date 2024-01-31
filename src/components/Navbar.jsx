@@ -93,7 +93,11 @@ const Navbar = () => {
             }
             {
                 user &&
-                <button onClick={logOutHandler} className='p-4 rounded-xl bg-slate-500 flex justify-center items-center text-white font-bold'>
+                <button onClick={() => {
+                    logOutHandler();
+                    toggle();
+                }
+                } className='p-4 rounded-xl bg-slate-500 flex justify-center items-center text-white font-bold'>
                     Log Out
                 </button>
             }

@@ -78,11 +78,10 @@ function CategoryPage() {
                     <p className='p-4 self-start text-xl font-semibold' >
                         All Category
                     </p>
-                    <div className='w-full h-[1px] bg-slate-400'></div>
                     <div className='w-full flex flex-col justify-between gap-2'>
                         {categories && categories.map((category) => {
-                            return <div key={category._id} className='w-full p-2'>
-                                <div className='grid grid-cols-4 gap-2 p-2'>
+                            return <div key={category._id} className='w-full p-2 bg-slate-100'>
+                                <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
                                     <p className='self-center'>
                                         {category.name}
                                     </p>

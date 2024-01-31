@@ -41,7 +41,7 @@ function LogInPage() {
 
     return (<>
         <div className='w-full h-svh flex justify-center bg-slate-50'>
-            <div className=" max-w-2xl w-full md:p-20 flex flex-col justify-center items-center gap-4">
+            <div className=" max-w-2xl w-full p-6 md:p-20 flex flex-col justify-center items-center gap-4">
                 <h1 className="font-extrabold text-4xl">LOG IN</h1>
                 <p className="font-light text-xl">Don't have an account? <Link to='/sign-up' className="underline">Sign up here</Link></p>
                 <div className="w-full flex flex-col justify-center items-center">
