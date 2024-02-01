@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { add_product } from '../../store/slices/productsSlice';
 import { get_all_categories } from '../../store/slices/categorySlice';
-import AddColorVariant from './component/AddColorVariant';
+import AddColorVariant from './components/AddColorVariant';
 import { useNavigate } from 'react-router-dom'
 
 function AddProductPage() {
@@ -39,7 +39,6 @@ function AddProductPage() {
             images: imageValues,
             sizeVariants: sizeValues,
         }
-        console.log(body)
         dispatch(add_product(body)).then(() => [
             navigate('/products')
         ]);

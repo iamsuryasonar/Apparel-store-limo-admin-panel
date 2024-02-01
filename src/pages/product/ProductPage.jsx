@@ -1,6 +1,6 @@
-import ProductDataTable from "./component/ProductDataTable";
+import ProductDataTable from "./components/ProductDataTable";
 import { useDispatch, useSelector } from 'react-redux'
-import EditProduct from './component/EditProduct.jsx';
+import EditProduct from './components/EditProduct.jsx';
 
 import { useState } from 'react'
 

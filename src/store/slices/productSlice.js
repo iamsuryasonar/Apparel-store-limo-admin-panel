@@ -3,6 +3,7 @@ import { setMessage, clearMessage } from "./messageSlice";
 import productServices from "../../services/product.services";
 import { setLoading } from "./loadingSlice";
 import { get_all_products } from './productsSlice'
+import { logout } from "./authSlice";
 
 export const get_a_product = createAsyncThunk(
     "product/get_a_product",
@@ -12,6 +13,9 @@ export const get_a_product = createAsyncThunk(
             const response = await productServices.get_a_product(id);
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -39,6 +43,9 @@ export const toggleIsPublished = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -65,6 +72,9 @@ export const add_color_and_its_size_variant = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -91,6 +101,9 @@ export const update_product_info = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -118,6 +131,9 @@ export const add_size_variant = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -144,6 +160,9 @@ export const update_size_variant = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -171,6 +190,9 @@ export const update_thumbnail = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -197,6 +219,9 @@ export const update_image = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -223,6 +248,9 @@ export const add_image = createAsyncThunk(
             thunkAPI.dispatch(get_all_products());
             return response.results.product;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&

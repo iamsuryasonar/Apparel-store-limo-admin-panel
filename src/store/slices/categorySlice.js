@@ -3,7 +3,7 @@ import { setMessage, clearMessage } from "./messageSlice";
 import productsServices from "../../services/products.services";
 import { setLoading } from "./loadingSlice";
 import categoryServices from "../../services/category.services";
-
+import { logout } from "./authSlice";
 
 export const get_all_categories = createAsyncThunk(
     "category/get_all_categories",
@@ -13,6 +13,9 @@ export const get_all_categories = createAsyncThunk(
             const response = await categoryServices.getAllCategories();
             return response.categories;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -38,6 +41,9 @@ export const add_category = createAsyncThunk(
             const response = await categoryServices.addCategory(data);
             return response.categories;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -65,6 +71,9 @@ export const update_category = createAsyncThunk(
             thunkAPI.dispatch(get_all_categories());
             return response.categories;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&

@@ -81,8 +81,7 @@ function ProductDataTable({ onEditToggle }) {
                 setValue('');
             }
         };
-
-
+        
         return (
             <div className='w-full flex justify-between items-center gap-2'>
                 <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md'>Add product</Link>
@@ -120,10 +119,10 @@ function ProductDataTable({ onEditToggle }) {
                                     keyword: item.keyword,
                                     tag: item.tag,
                                     action: (
-                                        <>
+                                        <div className='flex flex-row gap-2'>
                                             <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
                                             <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={() => onEditToggle(item, data?.products?.categories)} />
-                                        </>
+                                        </div>
                                     ),
                                 }
                             })

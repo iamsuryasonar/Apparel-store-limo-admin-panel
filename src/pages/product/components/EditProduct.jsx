@@ -140,7 +140,6 @@ function EditProduct({ onEditToggle, categories, productId }) {
         }
     }
     const updateImageHandler = (path, imageId, file) => {
-        console.log(path, imageId, file)
         if (path) {
             dispatch(update_image({ path, imageId, image: file, productId }));
         }

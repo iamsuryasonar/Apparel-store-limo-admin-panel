@@ -47,15 +47,16 @@ function AllOrdersComponent() {
                             </div>
                             <div className=' flex flex-row justify-between items-center'>
                                 <img className='w-10 h-10' src={item.item.colorvariant.thumbnail.url} />
-                                <p>{item.status}</p>
+                                <p className='font-bold'>{item.status}</p>
                                 <button onClick={
                                     () => {
                                         setModalItem(item);
                                         setModalVisibility(!modalVisible);
                                     }
-                                } className='p-2 bg-green-500 hover:bg-green-600 text-white rounded-md'>PROCESS</button>
+                                } className='p-2 bg-green-500 hover:bg-green-600 text-white rounded-md '>PROCESS</button>
                             </div>
-                            <p>Name: {item.item.product.name}</p>
+                            <p className='font-semibold text-slate-500'>Name: {item.item.product.name}</p>
+                            <p className='font-semibold text-slate-600'>ID: {item._id}</p>
                             <div className='p-4 border-[1px] border-black flex flex-row justify-between'>
                                 <p>Size:  {item.item.sizevariant.name}</p>
                                 <p>Quantity: {item.item.quantity}</p>

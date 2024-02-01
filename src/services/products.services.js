@@ -49,7 +49,6 @@ const getProductsByCategory = async (id) => {
 }
 
 const addProduct = async (data) => {
-    console.log(data.colorVariant.thumbnail);
     const formData = new FormData();
     //product info
     formData.append("name", data.product.name);

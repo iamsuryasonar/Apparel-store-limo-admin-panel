@@ -53,9 +53,10 @@ function SearchOrdersComponent() {
                     </div>
                     <div className=' flex flex-row justify-between items-center'>
                         <img className='w-10 h-10' src={order?.item.colorvariant.thumbnail.url} />
-                        <p>{order?.status}</p>
+                        <p className='font-bold'>{order?.status}</p>
                     </div>
-                    <p>Name: {order?.item.product.name}</p>
+                    <p className='font-semibold text-slate-500'>Name: {order?.item.product.name}</p>
+                    <p className='font-semibold '>ID: {order?._id}</p>
                     <div className='p-4 border-[1px] border-black flex flex-row justify-between'>
                         <p>Size:  {order?.item.sizevariant.name}</p>
                         <p>Quantity: {order?.item.quantity}</p>

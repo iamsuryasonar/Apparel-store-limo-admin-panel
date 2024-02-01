@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage, clearMessage } from "./messageSlice";
 import productsServices from "../../services/products.services";
 import { setLoading } from "./loadingSlice";
+import { logout } from "./authSlice";
 
 export const get_all_products = createAsyncThunk(
     "products/get_all_products",
@@ -11,6 +12,12 @@ export const get_all_products = createAsyncThunk(
             const response = await productsServices.getAllProducts(pagination_info);
             return response;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -35,6 +42,9 @@ export const get_a_product = createAsyncThunk(
             const response = await productsServices.get_a_product();
             return response;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -60,6 +70,9 @@ export const add_product = createAsyncThunk(
             const response = await productsServices.addProduct(product);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -85,6 +98,9 @@ export const toggleIsPublished = createAsyncThunk(
             const response = await productsServices.toggleIsPublished(productId);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -109,6 +125,9 @@ export const add_color_and_its_size_variant = createAsyncThunk(
             const response = await productsServices.add_color_size_variant(body);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -133,6 +152,9 @@ export const update_product_info = createAsyncThunk(
             const response = await productsServices.update_product_info(data);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -158,6 +180,9 @@ export const add_size_variant = createAsyncThunk(
             const response = await productsServices.add_size_variant(data);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -182,6 +207,9 @@ export const update_size_variant = createAsyncThunk(
             const response = await productsServices.update_size_variant(data);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -207,6 +235,9 @@ export const update_thumbnail = createAsyncThunk(
             const response = await productsServices.update_thumbnail(data);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -231,6 +262,9 @@ export const update_image = createAsyncThunk(
             const response = await productsServices.update_image(data);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -255,6 +289,9 @@ export const add_image = createAsyncThunk(
             const response = await productsServices.add_image(data);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -279,6 +316,9 @@ export const delete_product = createAsyncThunk(
             const response = await productsServices.deleteProduct(id);
             return response.data;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&

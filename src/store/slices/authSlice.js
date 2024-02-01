@@ -28,7 +28,6 @@ export const initialiseUser = createAsyncThunk(
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
-            console.log(message);
             thunkAPI.dispatch(setMessage(message));
             return thunkAPI.rejectWithValue();
         } finally {
@@ -150,7 +149,6 @@ const aAuthSlice = createSlice({
                 .addCase(register.rejected, (state, action) => {
                 })
                 .addCase(login.fulfilled, (state, action) => {
-                    console.log(action.payload)
                     state.userData = action.payload.userData;
                     state.accessToken = action.payload.accessToken;
                 }).addCase(login.rejected, (state, action) => {

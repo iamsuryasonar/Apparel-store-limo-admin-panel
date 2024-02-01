@@ -33,7 +33,6 @@ export const store = configureStore({
     },
 });
 
-
 store.dispatch(initialiseUser());
 
 export default store;

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage, clearMessage } from "./messageSlice";
 import ordersServices from "../../services/orders.services";
 import { setLoading } from "./loadingSlice";
+import { logout } from "./authSlice";
 
 export const get_an_order = createAsyncThunk(
     "orders/get_an_order",
@@ -11,6 +12,9 @@ export const get_an_order = createAsyncThunk(
             const response = await ordersServices.getAnOrder(id);
             return response.results;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&
@@ -36,6 +40,9 @@ export const update_order_status = createAsyncThunk(
             const response = await ordersServices.updateOrderStatus(data);
             return response.results;
         } catch (error) {
+            if (error.response.data.code === 401) {
+                thunkAPI.dispatch(logout());
+            }
             const message =
                 (error.response &&
                     error.response.data &&

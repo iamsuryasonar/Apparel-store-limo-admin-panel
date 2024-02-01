@@ -25,7 +25,6 @@ function AddColorVariant({ task, product, handler }) {
     ]);
 
     const onColorVariantChange = (e) => {
-        console.log(e.target.name);
         if (e.target.name === 'name') {
             setColorVariantValues({
                 ...colorVariantValues,
