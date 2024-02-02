@@ -4,12 +4,10 @@ import { get_an_order, update_order_status, clearOrder } from '../../../store/sl
 import { clearMessage } from '../../../store/slices/messageSlice'
 import Carousal from '../../../components/Carousal'
 import { ORDERSTATUS } from '../../../common/constants'
-import BottomAlert from '../../../components/BottomAlert'
 
 function SearchOrdersComponent() {
     const dispatch = useDispatch();
     const order = useSelector((state) => state.order.order);
-    const message = useSelector((state) => state.message.message);
     const [id, setId] = useState('');
     const [orderStatus, setOrderStatus] = useState('');
 
@@ -31,8 +29,7 @@ function SearchOrdersComponent() {
         dispatch(clearOrder());
     }, [])
 
-    return <div>
-        {message && <BottomAlert message={message} />}
+    return <>
         <div className="flex flex-row gap-2">
             <input onChange={(e) => { setId(e.target.value) }} name='id' type="text" placeholder='Product id' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
             <button
@@ -98,6 +95,6 @@ function SearchOrdersComponent() {
 
             </>
         }
-    </div>
+    </>
 }
 export default SearchOrdersComponent;

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { add_category, get_all_categories, update_category } from '../store/slices/categorySlice';
+import { add_category, get_all_categories, update_category } from '../../store/slices/categorySlice';
 import { useNavigate } from 'react-router-dom'
+import BottomAlert from '../../components/BottomAlert'
+import LoadingSpinner from '../../components/LoadingSpinner'
 
-function CategoryPage() {
+function CategoriesPage() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const categories = useSelector((state) => state.categories.categories);
+    const message = useSelector((state) => state.message.message);
     const [name, setName] = useState('');
     const [updatedName, setUpdatedName] = useState('');
     const [categoryStatus, setCategoryStatus] = useState('')
@@ -15,6 +17,7 @@ function CategoryPage() {
 
     const [image, setImage] = useState(null);
     const [updatedImage, setUpdatedImage] = useState('');
+    const [loadedImages, setLoadedImages] = useState([]);
 
     const onNameChange = (e) => {
         setName(e.target.value)
@@ -51,12 +54,19 @@ function CategoryPage() {
         dispatch(update_category(data));
     }
 
+
+    const handleImageLoad = (index) => {
+        setLoadedImages((prevLoadedImages) => [...prevLoadedImages, index]);
+    };
+
+
     useEffect(() => {
         dispatch(get_all_categories());
     }, [])
 
     return (
         <>
+            {message && <BottomAlert message={message} />}
             <div className='w-full p-6'>
                 <div className="w-full p-2 flex flex-col justify-center items-center border-[1px] border-black">
                     <p className='p-2 self-start text-xl font-semibold' >
@@ -79,8 +89,8 @@ function CategoryPage() {
                         All Category
                     </p>
                     <div className='w-full flex flex-col justify-between gap-2'>
-                        {categories && categories.map((category) => {
-                            return <div key={category._id} className='w-full p-2 bg-slate-100'>
+                        {categories && categories.map((category, index, _) => {
+                            return <div key={category._id} className='w-full p-2 '>
                                 <div className='grid grid-cols-2 md:grid-cols-4 gap-2 p-2'>
                                     <p className='self-center'>
                                         {category.name}
@@ -93,7 +103,9 @@ function CategoryPage() {
                                                 < p className='text-red-400'>IN-ACTIVE</p>
                                         }
                                     </div>
-                                    <img src={category.bannerImage.url} className='w-24 h-24 aspect-square' />
+                                    <div className={`w-24 h-24 ${loadedImages.includes(index) ? 'animate-none' : 'bg-slate-100 animate-pulse'} `}>
+                                        <img src={category.bannerImage.url} className='aspect-square' onLoad={() => handleImageLoad(index)} />
+                                    </div>
                                     <button onClick={() => {
                                         setSelectedCategory(category);
                                         setVisible(!isVisible);
@@ -134,11 +146,11 @@ function CategoryPage() {
 
 
                 </div>
-            </div>
+            </div >
         </>
     )
 }
 
 
-export default CategoryPage;
+export default CategoriesPage;
 

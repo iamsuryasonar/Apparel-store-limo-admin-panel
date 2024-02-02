@@ -42,7 +42,7 @@ const columns = [
     },
 ];
 
-function ProductDataTable({ onEditToggle }) {
+function ProductsDataTable({ onEditToggle }) {
     const [value, setValue] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
     const dispatch = useDispatch();
@@ -81,7 +81,7 @@ function ProductDataTable({ onEditToggle }) {
                 setValue('');
             }
         };
-        
+
         return (
             <div className='w-full flex justify-between items-center gap-2'>
                 <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md'>Add product</Link>
@@ -146,5 +146,5 @@ function ProductDataTable({ onEditToggle }) {
     );
 };
 
-export default ProductDataTable;
+export default ProductsDataTable;
 

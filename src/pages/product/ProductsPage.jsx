@@ -1,11 +1,11 @@
-import ProductDataTable from "./components/ProductDataTable";
+import ProductsDataTable from "./components/ProductsDataTable.jsx";
 import { useDispatch, useSelector } from 'react-redux'
 import EditProduct from './components/EditProduct.jsx';
-
+import BottomAlert from '../../components/BottomAlert.jsx'
 import { useState } from 'react'
 
-function ProductPage() {
-    const loading = useSelector((state) => state.loading.value);
+function ProductsPage() {
+    const message = useSelector((state) => state.message.message);
     const [editProductToggle, setEditProductToggle] = useState(false);
     const [product, setProduct] = useState(null);
     const [categories, setCategories] = useState(null);
@@ -23,13 +23,14 @@ function ProductPage() {
 
     return (
         <>
+            {message && <BottomAlert message={message} />}
             {editProductToggle ? (<EditProduct onEditToggle={onEditToggle} categories={categories} productId={product._id} />) : (
                 <div className=''>
-                    <ProductDataTable onEditToggle={onEditToggle} />
+                    <ProductsDataTable onEditToggle={onEditToggle} />
                 </div>
             )}
         </>
     )
 }
 
-export default ProductPage;
+export default ProductsPage;

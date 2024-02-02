@@ -4,13 +4,16 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slices/authSlice'
+import LoadingBar from './LoadingBar';
 
 const Navbar = () => {
     const [menu, setMenu] = useState(false);
-    const user = useSelector((state) => state.auth.userData);
+
     const dispatch = useDispatch();
     const location = useLocation();
 
+    const user = useSelector((state) => state.auth.userData);
+    const loading = useSelector((state) => state.loading.loading);
     const currentPageName = location.pathname;
 
     const toggle = () => {
@@ -58,6 +61,9 @@ const Navbar = () => {
     }
 
     return <>
+        {
+            loading && <LoadingBar />
+        }
         <div className="font-sans h-20 fixed top-0 left-0 right-0 px-10 flex flex-row justify-between items-center shadow-md bg-white z-10">
             <Link to="/" className="text-xl font-bold hover:scale-110 transition-all duration-300 ease-in-out uppercase">Limo<span className="text-blue-600">Store</span></Link>
             <div className="hidden md:flex md:flex-row md:justify-between md:gap-4 text-base  items-center">
@@ -102,6 +108,7 @@ const Navbar = () => {
                 </button>
             }
         </div>}
+
     </>
 };
 

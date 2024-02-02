@@ -9,6 +9,7 @@ function AddProductPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const categories = useSelector((state) => state.categories.categories);
+    const message = useSelector((state) => state.message.message);
     const [productValues, setProductValues] = useState(
         {
             name: '',
@@ -46,6 +47,7 @@ function AddProductPage() {
 
     return (
         <div className='w-full p-6 '>
+            {message && <BottomAlert message={message} />}
             <div className="w-full p-2 flex flex-col md:flex-row justify-center items-center border-[1px] border-black ">
                 <form className="w-full m-2  flex flex-col gap-6 font-light ">
                     <input onChange={onProductChange} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>

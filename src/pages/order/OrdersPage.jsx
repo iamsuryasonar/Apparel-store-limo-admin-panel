@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import AllOrdersComponent from './components/AllOrdersComponent'
 import OrderedItemsComponent from './components/OrderedItemsComponent'
 import ProcessedOrdersComponent from './components/ProcessedOrdersComponent'
@@ -6,9 +6,12 @@ import CancelledOrdersComponent from './components/CancelledOrdersComponent'
 import TransitOrdersComponent from './components/TransitOrdersComponent'
 import DeliveredOrdersComponent from './components/DeliveredOrdersComponent'
 import SearchOrdersComponent from './components/SearchOrdersComponent'
+import { useDispatch, useSelector } from 'react-redux';
+import BottomAlert from '../../components/BottomAlert'
 
 function OrdersPage() {
     const [currentPage, setCurrentPage] = useState('ALL_ORDERS')
+    const message = useSelector((state) => state.message.message);
 
     const pages = [
         {
@@ -41,6 +44,7 @@ function OrdersPage() {
     ]
 
     return <div className='w-full p-6 flex flex-col gap-4'>
+        {message && <BottomAlert message={message} />}
         <div className='flex flex-col md:flex-row justify-start gap-2'>
             {
                 pages.map((item) => {
@@ -74,6 +78,7 @@ function OrdersPage() {
         {
             currentPage === 'SEARCH' && <SearchOrdersComponent />
         }
+
 
     </div>
 }
