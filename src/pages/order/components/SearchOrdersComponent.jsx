@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_an_order, update_order_status, clearOrder } from '../../../store/slices/orderSlice'
 import { clearMessage } from '../../../store/slices/messageSlice'
-import Carousal from '../../../components/Carousal'
+import ImageCarousal from '../../../components/ImageCarousal'
 import { ORDERSTATUS } from '../../../common/constants'
 
 function SearchOrdersComponent() {
@@ -45,8 +45,8 @@ function SearchOrdersComponent() {
         {
             order && <>
                 <div className='flex flex-col gap-2'>
-                    <div className='flex flex-col items-center'>
-                        <Carousal images={order?.item?.colorvariant?.images} />
+                    <div className='place-self-center w-full'>
+                        <ImageCarousal images={item.item.colorvariant.images} />
                     </div>
                     <div className=' flex flex-row justify-between items-center'>
                         <img className='w-10 h-10' src={order?.item.colorvariant.thumbnail.url} />

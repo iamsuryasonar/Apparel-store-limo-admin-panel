@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { add_category, get_all_categories, update_category } from '../../store/slices/categorySlice';
 import { useNavigate } from 'react-router-dom'
 import BottomAlert from '../../components/BottomAlert'
-import LoadingSpinner from '../../components/LoadingSpinner'
 
 function CategoriesPage() {
     const dispatch = useDispatch();

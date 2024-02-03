@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get_a_product } from '../../../store/slices/productSlice';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ImageCarousal from '../../../components/ImageCarousal';
 
 function ViewProduct({ onComponentToggle, productId }) {
 
@@ -27,16 +28,9 @@ function ViewProduct({ onComponentToggle, productId }) {
                             <FontAwesomeIcon className="text-3xl hover:scale-150 transition-all duration-300 ease-in-out " icon={faXmark} onClick={onComponentToggle} />
                         </div>
                         <p className="p-1 rounded-sm  w-full  ">{product.tag}</p>
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 '>
-                            {
-                                product?.colorvariants[selectedColorVariant].images.map((image) => {
-                                    return (
-                                        <img key={image._id} src={image?.url} className=' w-full h-full object-cover aspect-square ' />
-                                    )
-                                })
-                            }
+                        <div className='place-self-center w-9/12'>
+                            <ImageCarousal images={product?.colorvariants[selectedColorVariant].images} />
                         </div>
-
                         <p className="py-1 rounded-sm w-full font-bold text-3xl">{product.name}</p>
                         <div className='flex flex-row gap-4 text-xl font-bold' >
                             <p className='line-through'>₹ {product?.colorvariants[selectedColorVariant].sizevariants[selectedSizeVariant].mrp}</p>

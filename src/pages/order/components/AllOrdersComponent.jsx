@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { get_all_orders, update_order_status } from "../../../store/slices/ordersSlice";
-import Carousal from '../../../components/Carousal'
+import ImageCarousal from '../../../components/ImageCarousal'
 import { ORDERSTATUS } from '../../../common/constants'
 import Pagination from '../../../components/Pagination'
 import { filterItems } from '../../../common/constants'
@@ -73,8 +73,8 @@ function AllOrdersComponent() {
                 {
                     orders?.orders?.map((item) => {
                         return <div key={item._id} className='flex flex-col gap-2'>
-                            <div key={item._id} className='flex flex-col items-center'>
-                                <Carousal images={item.item.colorvariant.images} />
+                            <div className='place-self-center w-full'>
+                                <ImageCarousal images={item.item.colorvariant.images} />
                             </div>
                             <div className=' flex flex-row justify-between items-center'>
                                 <img className='w-10 h-10' src={item.item.colorvariant.thumbnail.url} />
