@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage, clearMessage } from "./messageSlice";
-import productsServices from "../../services/products.services";
 import { setLoading } from "./loadingSlice";
 import categoryServices from "../../services/category.services";
 import { logout } from "./authSlice";

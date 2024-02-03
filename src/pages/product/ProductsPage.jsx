@@ -1,5 +1,5 @@
 import ProductsDataTable from "./components/ProductsDataTable.jsx";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import EditProduct from './components/EditProduct.jsx';
 import BottomAlert from '../../components/BottomAlert.jsx'
 import { useState } from 'react'

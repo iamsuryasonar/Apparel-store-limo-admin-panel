@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { add_category, get_all_categories, update_category } from '../../store/slices/categorySlice';
-import { useNavigate } from 'react-router-dom'
 import BottomAlert from '../../components/BottomAlert'
 
 function CategoriesPage() {

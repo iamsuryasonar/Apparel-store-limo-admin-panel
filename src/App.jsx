@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router'
+import { useSelector } from "react-redux";
 import DashboardPage from './pages/dashboard/DashboardPage';
 import NavAndOutlet from './components/NavAndOutlet'
 import LogInPage from './pages/auth/LogInPage'
@@ -8,7 +9,6 @@ import AddProductPage from './pages/product/AddProductPage'
 import CategoriesPage from './pages/category/CategoriesPage'
 import PrivateRoute from './components/auth_guards/private_route'
 import PublicRoute from './components/auth_guards/public_route'
-import { useSelector } from "react-redux";
 import OrdersPage from './pages/order/OrdersPage'
 
 function App() {
@@ -22,7 +22,6 @@ function App() {
           <Route path='/' element={<LogInPage />}></Route>
           <Route path='/sign-up' element={<RegisterPage />}></Route>
         </Route>
-
         <Route element={<PrivateRoute userData={userData} />}>
           <Route path='/dashboard' element={<DashboardPage />}></Route>
           <Route path='/products' element={<ProductsPage />}></Route>

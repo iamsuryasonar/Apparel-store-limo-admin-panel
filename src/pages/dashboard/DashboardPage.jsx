@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCartShopping, faWallet, faUser, faPerson } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { faCartShopping, faWallet, faUser, faPerson } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
 import BottomAlert from '../../components/BottomAlert'
 
 const Widget = ({ title, icon }) => {

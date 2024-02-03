@@ -1,7 +1,6 @@
 //? since AddProductPage page and EditProduct Component both require same form to be filled 
 //? this Component created. Task ('ADD' or 'EDIT') prop tells this component, which handler to call upon submission of the form
 
-
 import { useState } from 'react'
 
 function AddColorVariant({ task, product, handler }) {

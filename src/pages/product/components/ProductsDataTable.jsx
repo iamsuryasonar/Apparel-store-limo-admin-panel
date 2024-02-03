@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState, useMemo } from 'react'
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom'
