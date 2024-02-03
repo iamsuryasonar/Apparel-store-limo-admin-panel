@@ -4,6 +4,7 @@ import { get_all_delivered_products, update_order_status } from "../../../store/
 import Carousal from '../../../components/Carousal'
 import { ORDERSTATUS } from '../../../common/constants'
 import Pagination from '../../../components/Pagination'
+import { filterItems } from '../../../common/constants'
 
 function DeliveredOrdersComponent() {
     const dispatch = useDispatch();
@@ -12,14 +13,16 @@ function DeliveredOrdersComponent() {
     const [modalVisible, setModalVisibility] = useState(false);
     const [orderStatus, setOrderStatus] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [filterInfo, setFilterInfo] = useState(filterItems.OLDEST_FIRST)
+    const [toggleDropdown, setToggleDropdown] = useState(false)
 
-    const fetchOrdersData = async (pageNo) => {
-        dispatch(get_all_delivered_products({ pageNo }));
+    const fetchOrdersData = async (pageNo, filterInfo) => {
+        dispatch(get_all_delivered_products({ pageNo, filterInfo }));
     };
 
     useEffect(() => {
-        fetchOrdersData(currentPage);
-    }, [currentPage]);
+        fetchOrdersData(currentPage, filterInfo);
+    }, [currentPage, filterInfo]);
 
     const updateOrderStatusHandler = (id) => {
         dispatch(update_order_status({
@@ -37,7 +40,36 @@ function DeliveredOrdersComponent() {
     };
 
     return (
-        <div className='relative w-full p-6'>
+        <div className='relative w-full p-6 flex flex-col'>
+            <div className='place-self-end md:mr-8'>
+                <div className="place-self-end flex flex-col">
+                    <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded min-w-56 flex items-center justify-between"
+                        onClick={(e) => {
+                            setToggleDropdown(!toggleDropdown);
+                        }}
+                    >
+                        <span className="mr-1">Filter</span>
+                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg>
+                    </button>
+                    {toggleDropdown &&
+                        <ul className=" text-gray-700 pt-1">
+                            <li className=""><p className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"
+                                onClick={() => {
+                                    setFilterInfo(filterItems.NEWEST_FIRST)
+                                    console.log('newest')
+                                }}
+                            >Newest first</p></li>
+                            <div className=' h-[1px] bg-slate-400 '></div>
+                            <li className=""><p className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"
+                                onClick={() => {
+                                    setFilterInfo(filterItems.OLDEST_FIRST)
+                                    console.log('oldest')
+                                }}
+                            >Oldest first</p></li>
+                        </ul>
+                    }
+                </div>
+            </div>
             <div className="w-full p-2 grid grid-cols-1 md:grid-cols-2 gap-16">
                 {
                     orders?.orders?.map((item) => {

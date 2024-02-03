@@ -34,6 +34,7 @@ const getAllOrders = async (data) => {
             params: {
                 page: data.pageNo,
                 limit: data.limit,
+                filter: data.filterInfo,
             }, headers: getheaders()
         },)
     return response.data
