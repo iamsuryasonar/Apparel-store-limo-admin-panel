@@ -84,7 +84,7 @@ function ProductsDataTable({ onComponentToggle }) {
 
         return (
             <div className='w-full flex justify-between items-center gap-2'>
-                <Link to='/add-product' className='px-2 py-1 bg-green-400 rounded-md'>Add product</Link>
+                <Link to='/add-product' className='px-2 py-1 rounded-md bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white'>Add product</Link>
                 <div className='flex flex-col md:flex-row gap-2'>
                     <input
                         id="search"
@@ -94,7 +94,7 @@ function ProductsDataTable({ onComponentToggle }) {
                         value={value}
                         onChange={e => setValue(e.target.value)}>
                     </input>
-                    <button className='px-2 py-1 bg-green-400 rounded-md' onClick={handleClear} > Clear</button >
+                    <button className='px-2 py-1 rounded-md bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white' onClick={handleClear} > Clear</button >
                 </div>
             </div>
         );

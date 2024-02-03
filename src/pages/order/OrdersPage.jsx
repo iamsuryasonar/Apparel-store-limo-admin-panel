@@ -52,7 +52,7 @@ function OrdersPage() {
                         () => {
                             setCurrentPage(item.id)
                         }
-                    } className={`bg-green-500 hover:bg-green-600 text-white p-2 rounded-md ${currentPage === item.id ? 'bg-green-700' : ''}`}>{item.name}</button>
+                    } className={`bg-slate-300 text-black p-2 rounded-md ${currentPage === item.id ? 'bg-slate-600 text-white' : ''} hover:bg-slate-600 hover:text-white `}>{item.name}</button>
                 })
             }
         </div>

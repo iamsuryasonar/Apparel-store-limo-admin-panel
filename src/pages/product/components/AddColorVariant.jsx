@@ -114,7 +114,7 @@ function AddColorVariant({ task, product, handler }) {
                                         {imageValues.length !== 1 && (
                                             <button
                                                 onClick={() => removeImageField(index)}
-                                                className=" text-2xl w-10 aspect-square bg-slate-500 rounded-full text-white"
+                                                className=" text-2xl w-10 aspect-square rounded-full bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
                                                 type="button"
                                             >
                                                 -
@@ -127,7 +127,7 @@ function AddColorVariant({ task, product, handler }) {
                         {imageValues.length < 4 && (
                             <button
                                 onClick={() => addImageField()}
-                                className="text-2xl w-full h-10 aspect-square bg-slate-500  text-white"
+                                className="text-2xl w-full h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
                                 type="button"
                             >
                                 +
@@ -143,7 +143,7 @@ function AddColorVariant({ task, product, handler }) {
                         {sizeValues.length <= 5 && (
                             <button
                                 onClick={() => addSizeForm()}
-                                className="text-2xl w-full h-10 aspect-square bg-slate-500  text-white"
+                                className="text-2xl w-full h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
                                 type="button"
                             >
                                 +
@@ -169,7 +169,7 @@ function AddColorVariant({ task, product, handler }) {
                                 {sizeValues.length !== 1 && (
                                     <button
                                         onClick={() => removeSizeForm(index)}
-                                        className="text-2xl w-full h-10 aspect-square bg-slate-500  text-white"
+                                        className="text-2xl w-full h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
                                         type="button"
                                     >
                                         -
@@ -182,7 +182,7 @@ function AddColorVariant({ task, product, handler }) {
                         sizeValues.length >= 1 && (
                             <button
                                 onClick={addOrEditHandler}
-                                className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-500  text-white"
+                                className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
                                 type="button"
                             >
                                 Submit variant

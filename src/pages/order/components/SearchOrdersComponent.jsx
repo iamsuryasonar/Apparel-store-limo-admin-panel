@@ -36,7 +36,7 @@ function SearchOrdersComponent() {
                 onClick={
                     onSearchHandler
                 }
-                className="w-24 text-xl font-thin h-10 aspect-square bg-slate-500  text-white"
+                className="w-24 text-xl font-thin h-10  aspect-square bg-slate-500 active:bg-slate-600 text-white"
                 type="button"
             >
                 Search
@@ -46,7 +46,7 @@ function SearchOrdersComponent() {
             order && <>
                 <div className='flex flex-col gap-2'>
                     <div className='place-self-center w-full'>
-                        <ImageCarousal images={item.item.colorvariant.images} />
+                        <ImageCarousal images={order?.item.colorvariant.images} />
                     </div>
                     <div className=' flex flex-row justify-between items-center'>
                         <img className='w-10 h-10' src={order?.item.colorvariant.thumbnail.url} />
@@ -90,7 +90,6 @@ function SearchOrdersComponent() {
                             </button>
                         </div>
                     </div>
-                    <div className='h-[1px] bg-slate-500 my-2'></div>
                 </div>
 
             </>

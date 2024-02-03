@@ -41,26 +41,26 @@ function AllOrdersComponent() {
 
 
     return (
-        <div className='relative w-full p-6 flex flex-col'>
+        <div className='relative w-full flex flex-col'>
             <div className='place-self-end md:mr-8'>
                 <div className="place-self-end flex flex-col">
-                    <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded min-w-56 flex items-center justify-between"
+                    <button className="bg-slate-300 text-black font-semibold py-2 px-4 rounded min-w-56 flex items-center justify-between"
                         onClick={(e) => {
                             setToggleDropdown(!toggleDropdown);
                         }}
                     >
-                        <span className="mr-1">Filter</span>
+                        <span className="mr-1 ">Filter</span>
                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /> </svg>
                     </button>
                     {toggleDropdown &&
-                        <ul className=" text-gray-700 pt-1">
-                            <li className=""><p className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"
+                        <ul className=" bg-slate-200 pt-1">
+                            <li className=""><p className="rounded-t bg-slate-300 hover:bg-slate-600 hover:text-white py-2 px-4 block whitespace-no-wrap cursor-pointer"
                                 onClick={() => {
                                     setFilterInfo(filterItems.NEWEST_FIRST)
                                 }}
                             >Newest first</p></li>
-                            <div className=' h-[1px] bg-slate-400 '></div>
-                            <li className=""><p className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"
+                            <div className=' h-[1px] bg-slate-200 '></div>
+                            <li className=""><p className="bg-slate-300 hover:bg-slate-600 hover:text-white py-2 px-4 block whitespace-no-wrap cursor-pointer"
                                 onClick={() => {
                                     setFilterInfo(filterItems.OLDEST_FIRST)
                                 }}
@@ -69,7 +69,7 @@ function AllOrdersComponent() {
                     }
                 </div>
             </div>
-            <div className="w-full p-2 grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div className="w-full mt-2  grid grid-cols-1 md:grid-cols-2 gap-16">
                 {
                     orders?.orders?.map((item) => {
                         return <div key={item._id} className='flex flex-col gap-2'>
@@ -102,7 +102,6 @@ function AllOrdersComponent() {
                                 <p>Town: {item.address.town}</p>
                                 <p>State: {item.address.state}</p>
                             </div>
-                            <div className='h-[1px] bg-slate-500 my-2'></div>
                         </div>
                     })
                 }
@@ -111,23 +110,23 @@ function AllOrdersComponent() {
                 <div className="absolute m-4 top-0 right-0 left-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white p-6 rounded shadow-lg overflow-y-auto max-h-screen w-screen">
                         <div className='flex flex-row justify-between'>
-                            <p className="text-xl font-semibold mb-4">Process order</p>
+                            <p className="text-xl font-semibold place-self-center">Process order</p>
                             <button onClick={
                                 () => {
                                     setModalVisibility(!modalVisible);
                                     setModalItem(null);
                                 }
-                            } className="bg-red-500 text-white py-2 px-4 rounded">
-                                Close Modal
+                            } className="bg-red-500 text-white m-2 w-8 h-8 rounded-full text-2xl ">
+                                X
                             </button>
                         </div>
                         <div className='flex flex-col gap-2'>
-                            <div className='flex flex-col items-center'>
-                                <Carousal images={modalItem.item.colorvariant.images} />
+                            <div className='place-self-center w-full'>
+                                <ImageCarousal images={modalItem.item.colorvariant.images} />
                             </div>
-                            <div className=' flex flex-row justify-between items-center'>
+                            <div className=' flex flex-row justify-between items-center gap-2'>
                                 <img className='w-10 h-10' src={modalItem.item.colorvariant.thumbnail.url} />
-                                <p >Name: {modalItem.item.product.name}</p>
+                                <p className='font-bold'>{modalItem.item.product.name}</p>
                             </div>
                             <div className='p-4 border-[1px] border-black flex flex-row justify-between'>
                                 <p>Size:  {modalItem.item.sizevariant.name}</p>
@@ -165,7 +164,6 @@ function AllOrdersComponent() {
                                     </button>
                                 </div>
                             </div>
-                            <div className='h-[1px] bg-slate-500 my-2'></div>
                         </div>
                     </div>
                 </div>

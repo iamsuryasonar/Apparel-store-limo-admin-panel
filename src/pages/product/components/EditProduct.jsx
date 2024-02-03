@@ -337,7 +337,7 @@ function AddSizeComponent() {
         </form>
         <button
             onClick={() => addSizeVariantHandler()}
-            className="text-xl w-full h-10 aspect-square bg-green-400  text-white"
+            className="text-xl w-full h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
             type="button"
         >
             Add
