@@ -42,7 +42,7 @@ const columns = [
     },
 ];
 
-function ProductsDataTable({ onEditToggle }) {
+function ProductsDataTable({ onComponentToggle }) {
     const [value, setValue] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
     const dispatch = useDispatch();
@@ -114,19 +114,23 @@ function ProductsDataTable({ onEditToggle }) {
                         data={
                             filteredItems.map((item) => {
                                 return {
+                                    product: item,
                                     name: item.name,
                                     description: item.description,
                                     keyword: item.keyword,
                                     tag: item.tag,
                                     action: (
                                         <div className='flex flex-row gap-2'>
-                                            <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} />
-                                            <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={() => onEditToggle(item, data?.products?.categories)} />
+                                            {/* <FontAwesomeIcon icon={faTrash} className="p-1 text-green-500 hover:text-red-500" onClick={(e) => { }} /> */}
+                                            <FontAwesomeIcon icon={faPenToSquare} className="p-1 text-green-500 hover:text-red-500" onClick={() => onComponentToggle('EDIT', item, data?.products?.categories)} />
                                         </div>
                                     ),
                                 }
                             })
                         }
+                        onRowClicked={(row, event) => {
+                            onComponentToggle('VIEW', row.product, data?.products?.categories)
+                        }}
                         pagination
                         paginationServer
                         paginationTotalRows={totalRows}

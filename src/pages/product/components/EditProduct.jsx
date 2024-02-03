@@ -5,7 +5,7 @@ import { faXmark, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddColorVariant from './AddColorVariant'
 
-function EditProduct({ onEditToggle, categories, productId }) {
+function EditProduct({ onComponentToggle, categories, productId }) {
 
     const dispatch = useDispatch();
     const product = useSelector((state) => state.product.product);
@@ -151,7 +151,7 @@ function EditProduct({ onEditToggle, categories, productId }) {
             <div className='w-full p-6 grid place-content-center'>
                 <div className='flex flex-row justify-between'>
                     <p className='text-bold text-2xl'>Update Product</p>
-                    <FontAwesomeIcon className="text-3xl hover:scale-150 transition-all duration-300 ease-in-out " icon={faXmark} onClick={onEditToggle} />
+                    <FontAwesomeIcon className="text-3xl hover:scale-150 transition-all duration-300 ease-in-out " icon={faXmark} onClick={onComponentToggle} />
                 </div>
                 <div className='w-full flex flex-col'>
                     <div className='w-full place-self-center my-10 '>

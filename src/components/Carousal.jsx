@@ -22,8 +22,8 @@ function Carousal({ images }) {
     }
 
     return (
-        <div className='m-8'>
-            <div className='relative w-full aspect-square'>
+        <div className='m-8 '>
+            <div className='relative w-full aspect-square '>
                 <div className={`w-full h-full min-w-80 min-h-80 ${loadedImages.includes(currentIndex) ? 'animate-none ' : 'bg-slate-100 animate-pulse'} `} >
                     <img src={images[currentIndex]?.url} className={`object-cover rounded-sm aspect-square ${loadedImages.includes(currentIndex) ? ' block' : ' hidden'}`} onLoad={() => handleImageLoad(currentIndex)} />
                 </div>
