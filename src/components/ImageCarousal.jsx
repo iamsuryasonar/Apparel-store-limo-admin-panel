@@ -1,5 +1,8 @@
 import { useState, useRef } from 'react'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
+
 
 function ImageCarousal({ images }) {
     const [currentImage, setCurrentImage] = useState(0);
@@ -63,12 +66,16 @@ function ImageCarousal({ images }) {
             <div className='absolute top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2'>
                 {!loadedImages.includes(currentImage) ? <LoadingSpinner /> : <></>}
             </div>
-            <button className='bg-red-300 text-white text-3xl w-10 h-10 absolute top-1/2 bottom-1/2 left-0 -translate-y-1/2'
+            <button className=' active:text-teal-500 text-white text-3xl w-8 h-8 absolute top-1/2 bottom-1/2 left-1 -translate-y-1/2 flex items-center justify-center'
                 onClick={prevImageHandler}
-            >&lt;</button>
-            <button className='bg-red-300 text-white text-3xl w-10 h-10 absolute top-1/2 bottom-1/2 right-0 -translate-y-1/2'
+            >
+                <FontAwesomeIcon icon={faCircleChevronLeft} />
+            </button>
+            <button className=' active:text-teal-500 text-white text-3xl w-8 h-8 absolute top-1/2 bottom-1/2 right-1 -translate-y-1/2 flex items-center justify-center'
                 onClick={nextImageHandler}
-            >&gt;</button>
+            >
+                <FontAwesomeIcon icon={faCircleChevronRight} />
+            </button>
         </div >
         <div className='w-full flex flex-row gap-2 mt-4 justify-end'>
             {images.map((item, index) => {

@@ -27,9 +27,9 @@ function ViewProduct({ onComponentToggle, productId }) {
                         <div className='flex flex-row justify-end'>
                             <FontAwesomeIcon className="text-3xl hover:scale-150 transition-all duration-300 ease-in-out " icon={faXmark} onClick={onComponentToggle} />
                         </div>
-                        <p className="p-1 rounded-sm  w-full  ">{product.tag}</p>
-                        <div className='place-self-center md:w-9/12 w-full'>
+                        <div className='relative place-self-center md:w-9/12 w-full'>
                             <ImageCarousal images={product?.colorvariants[selectedColorVariant].images} />
+                            <p className="absolute top-0 left-0 bg-teal-300 text-white px-1 -rotate-45 -translate-x-6 translate-y-2">{product.tag}</p>
                         </div>
                         <p className="py-1 rounded-sm w-full font-bold text-3xl">{product.name}</p>
                         <div className='flex flex-row gap-4 text-xl font-bold' >
