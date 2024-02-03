@@ -29,7 +29,7 @@ function ViewProduct({ onComponentToggle, productId }) {
                         </div>
                         <div className='relative place-self-center md:w-9/12 w-full'>
                             <ImageCarousal images={product?.colorvariants[selectedColorVariant].images} />
-                            <p className="absolute top-0 left-0 bg-teal-300 text-white px-1 -rotate-45 -translate-x-6 translate-y-2">{product.tag}</p>
+                            <p className="absolute top-0 left-0  text-white px-1 w-40 h-40 text-center origin-center -rotate-45"><span className='bg-teal-300 px-4 py-2'>{product?.tag}</span></p>
                         </div>
                         <p className="py-1 rounded-sm w-full font-bold text-3xl">{product.name}</p>
                         <div className='flex flex-row gap-4 text-xl font-bold' >
