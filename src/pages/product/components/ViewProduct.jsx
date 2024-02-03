@@ -28,7 +28,7 @@ function ViewProduct({ onComponentToggle, productId }) {
                             <FontAwesomeIcon className="text-3xl hover:scale-150 transition-all duration-300 ease-in-out " icon={faXmark} onClick={onComponentToggle} />
                         </div>
                         <p className="p-1 rounded-sm  w-full  ">{product.tag}</p>
-                        <div className='place-self-center w-9/12'>
+                        <div className='place-self-center md:w-9/12 w-full'>
                             <ImageCarousal images={product?.colorvariants[selectedColorVariant].images} />
                         </div>
                         <p className="py-1 rounded-sm w-full font-bold text-3xl">{product.name}</p>
