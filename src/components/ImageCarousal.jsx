@@ -79,7 +79,7 @@ function ImageCarousal({ images }) {
         </div >
         <div className='w-full flex flex-row gap-2 mt-4 justify-end'>
             {images.map((item, index) => {
-                return <img src={item.url} className={`w-1/6 object-cover aspect-square ${currentImage === index ? 'border-2 border-slate-500' : ''}`}
+                return <img key={item._id} src={item.url} className={`w-1/6 object-cover aspect-square ${currentImage === index ? 'border-2 border-slate-500' : ''}`}
                     onClick={() => {
                         setCurrentImage(index)
                     }}

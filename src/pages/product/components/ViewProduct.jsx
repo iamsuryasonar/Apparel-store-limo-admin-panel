@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { get_a_product } from '../../../store/slices/productSlice';
+import { get_a_product, clearProduct } from '../../../store/slices/productSlice';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImageCarousal from '../../../components/ImageCarousal';
@@ -13,6 +13,7 @@ function ViewProduct({ onComponentToggle, productId }) {
     const [selectedSizeVariant, setSelectedSizeVariant] = useState(0);
 
     useEffect(() => {
+        dispatch(clearProduct());
         dispatch(get_a_product(productId))
     }, [])
 
