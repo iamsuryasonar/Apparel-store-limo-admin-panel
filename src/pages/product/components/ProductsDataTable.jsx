@@ -121,8 +121,8 @@ function ProductsDataTable({ onComponentToggle }) {
         };
 
         return (
-            <div className='w-full flex justify-between items-center gap-2'>
-                <Link to='/add-product' className='text-wrap md:text-nowrap px-2 py-1  bg-slate-600 hover:bg-black text-white  active:bg-black '>Add product</Link>
+            <div className='w-full flex justify-between gap-2'>
+                <Link to='/add-product' className='h-auto  flex items-center text-wrap md:text-nowrap bg-slate-600 hover:bg-black text-white active:bg-black px-2'><p>Add product</p></Link>
                 <div className='w-full flex flex-col md:flex-row gap-2'>
                     <input
                         id="search"

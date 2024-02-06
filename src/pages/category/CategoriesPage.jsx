@@ -65,7 +65,7 @@ function CategoriesPage() {
     return (
         <>
             {message && <BottomAlert message={message} />}
-            <div className='w-full p-6'>
+            <div className='w-full'>
                 <div className="w-full p-2 flex flex-col justify-center items-center border-[1px] border-black">
                     <p className='p-2 self-start text-xl font-semibold' >
                         Add Category
