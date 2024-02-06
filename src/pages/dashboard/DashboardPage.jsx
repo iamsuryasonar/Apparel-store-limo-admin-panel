@@ -97,9 +97,8 @@ const DashboardPage = () => {
     const message = useSelector((state) => state.message.message);
 
     return (
-        <div className='w-full p-6 '>
+        <div className='w-full '>
             {message && <BottomAlert message={message} />}
-
             <div className='w-full my-10 flex flex-col items-center justify-center gap-4 '>
                 <div className='w-full  grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
                     <Widget title={'Total Orders'} icon={faCartShopping} />

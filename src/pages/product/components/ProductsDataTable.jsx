@@ -19,12 +19,14 @@ const columns = [
         selector: row => row.description,
         sortable: true,
         maxWidth: '400px',
+        hide: 'sm',
     },
     {
         name: 'Keyword',
         selector: row => row.keyword,
         sortable: true,
         maxWidth: '200px',
+        hide: 'sm',
     },
     {
         name: 'Tag',
@@ -32,6 +34,7 @@ const columns = [
         sortable: true,
         right: true,
         maxWidth: '150px',
+        hide: 'sm',
     },
     {
         name: 'Action',
@@ -41,6 +44,41 @@ const columns = [
         maxWidth: '80px',
     },
 ];
+
+const customStyles = {
+    header: {
+        style: {
+            backgroundColor: 'bg-slate-100',
+        },
+    },
+    subHeader: {
+        style: {
+            paddingLeft: '8px',
+            paddingRight: '8px',
+            backgroundColor: 'bg-slate-100',
+        },
+    },
+    headRow: {
+        style: {
+            backgroundColor: 'bg-slate-100',
+        },
+    },
+    table: {
+        style: {
+            backgroundColor: 'bg-slate-100',
+        },
+    },
+    rows: {
+        style: {
+            backgroundColor: 'bg-slate-100',
+        },
+    },
+    pagination: {
+        style: {
+            backgroundColor: 'bg-slate-100',
+        },
+    }
+};
 
 function ProductsDataTable({ onComponentToggle }) {
     const [value, setValue] = useState('');
@@ -84,17 +122,17 @@ function ProductsDataTable({ onComponentToggle }) {
 
         return (
             <div className='w-full flex justify-between items-center gap-2'>
-                <Link to='/add-product' className='px-2 py-1 rounded-md bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white'>Add product</Link>
-                <div className='flex flex-col md:flex-row gap-2'>
+                <Link to='/add-product' className='text-wrap md:text-nowrap px-2 py-1  bg-slate-600 hover:bg-black text-white  active:bg-black '>Add product</Link>
+                <div className='w-full flex flex-col md:flex-row gap-2'>
                     <input
                         id="search"
-                        className='border-2 px-2 '
+                        className='w-full border-[1px] border-black px-2 bg-slate-50 placeholder:text-slate-400 placeholder:font-light'
                         type="text"
                         placeholder="Filter by product name"
                         value={value}
                         onChange={e => setValue(e.target.value)}>
                     </input>
-                    <button className='px-2 py-1 rounded-md bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white' onClick={handleClear} > Clear</button >
+                    <button className='px-2 py-1  bg-slate-600 hover:bg-black text-white  active:bg-black' onClick={handleClear} > Clear</button >
                 </div>
             </div>
         );
@@ -102,7 +140,7 @@ function ProductsDataTable({ onComponentToggle }) {
 
     return (
         <>
-            <div className=' w-full flex flex-col p-4'>
+            <div className=' w-full flex flex-col '>
                 {loading ? (
                     <div className="absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center  bg-opacity-90 z-50">
                         <div className="animate-spin border-t-8 border-blue-500 border-solid rounded-full w-16 h-16"></div>
@@ -131,6 +169,7 @@ function ProductsDataTable({ onComponentToggle }) {
                         onRowClicked={(row, event) => {
                             onComponentToggle('VIEW', row.product, data?.products?.categories)
                         }}
+                        className='w-full'
                         pagination
                         paginationServer
                         paginationTotalRows={totalRows}
@@ -143,6 +182,7 @@ function ProductsDataTable({ onComponentToggle }) {
                         subHeaderComponent={subHeaderComponentMemo}
                         persistTableHead
                         progressPending={loading}
+                        customStyles={customStyles}
                     />
                 }
             </div>

@@ -46,7 +46,7 @@ function AddProductPage() {
     }
 
     return (
-        <div className='w-full p-6 '>
+        <div className='w-full'>
             {message && <BottomAlert message={message} />}
             <div className="w-full p-2 flex flex-col md:flex-row justify-center items-center border-[1px] border-black ">
                 <form className="w-full m-2  flex flex-col gap-6 font-light ">

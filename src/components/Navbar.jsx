@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import {  useState } from 'react';
+import { useState } from 'react';
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from 'react-redux';
@@ -79,7 +79,7 @@ const Navbar = () => {
                 {
                     user &&
                     <button onClick={logOutHandler}
-                        className='p-2 rounded-xl bg-slate-500 flex justify-center items-center text-white font-bold'>
+                        className='px-2 rounded-xl flex justify-center items-center font-bold bg-slate-600 hover:bg-black text-white active:bg-black'>
                         Log Out
                     </button>
                 }

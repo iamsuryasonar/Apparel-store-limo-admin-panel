@@ -181,7 +181,7 @@ function AddColorVariant({ task, product, handler }) {
                         sizeValues.length >= 1 && (
                             <button
                                 onClick={addOrEditHandler}
-                                className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
+                                className="text-xl font-light w-full my-4 h-10 aspect-square bg-slate-600 hover:bg-black text-white  active:bg-black"
                                 type="button"
                             >
                                 Submit variant

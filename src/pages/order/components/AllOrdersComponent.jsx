@@ -40,9 +40,10 @@ function AllOrdersComponent() {
     };
 
 
+
     return (
         <div className='relative w-full flex flex-col'>
-            <div className='place-self-end md:mr-8'>
+            <div className='place-self-end '>
                 <div className="place-self-end flex flex-col">
                     <button className="bg-slate-300 text-black font-semibold py-2 px-4 rounded min-w-56 flex items-center justify-between"
                         onClick={(e) => {
@@ -169,7 +170,7 @@ function AllOrdersComponent() {
                 </div>
             }
             <div className='h-[1px] bg-slate-500 my-2'></div>
-            <Pagination currentPage={currentPage} totalPages={orders?.pagination.total_pages} handlePageChange={handlePageChange} />
+            <Pagination currentPage={currentPage} totalPages={orders?.pagination.total_pages} totalOrders={orders?.pagination.total_orders} handlePageChange={handlePageChange} />
         </div>
     )
 }

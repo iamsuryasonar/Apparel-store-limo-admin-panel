@@ -77,7 +77,7 @@ function CategoriesPage() {
                     </form>
                     <button
                         onClick={addCategoryHandler}
-                        className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
+                        className="text-xl font-light w-full my-4 h-10 aspect-square  bg-slate-600 hover:bg-black text-white  active:bg-black"
                         type="button"
                     >
                         Add
@@ -109,7 +109,7 @@ function CategoriesPage() {
                                         setVisible(!isVisible);
                                         setUpdatedName(category.name);
                                         setCategoryStatus(category.isActive)
-                                    }} className='px-6 py-2 self-center bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white'>Edit</button>
+                                    }} className='px-6 py-2 self-center bg-slate-600 hover:bg-black text-white  active:bg-black'>Edit</button>
                                 </div>
                                 {
                                     isVisible && (selectedCategory._id === category._id) && (
@@ -128,7 +128,7 @@ function CategoriesPage() {
                                                     onClick={() => {
                                                         updateCategoryHandler(category._id)
                                                     }}
-                                                    className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
+                                                    className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-600 hover:bg-black text-white  active:bg-black"
                                                     type="button"
                                                 >
                                                     Update
