@@ -1,6 +1,5 @@
 
 function Pagination({ currentPage, totalPages, totalOrders, handlePageChange }) {
-    console.log(totalOrders)
     if (totalOrders === 0) return <></>
 
     return <div className='flex flex-row justify-end'>

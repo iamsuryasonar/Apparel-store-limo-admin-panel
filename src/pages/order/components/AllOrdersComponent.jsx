@@ -169,6 +169,7 @@ function AllOrdersComponent() {
                     </div>
                 </div>
             }
+            {orders?.pagination?.total_orders === 0 && <p className='self-end'>No orders found </p>}
             <div className='h-[1px] bg-slate-500 my-2'></div>
             <Pagination currentPage={currentPage} totalPages={orders?.pagination.total_pages} totalOrders={orders?.pagination.total_orders} handlePageChange={handlePageChange} />
         </div>
