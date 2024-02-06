@@ -43,43 +43,43 @@ function OrdersPage() {
         }
     ]
 
-    return <div className='w-full flex flex-col gap-4'>
-        {message && <BottomAlert message={message} />}
-        <div className='flex flex-col md:flex-row justify-end gap-2'>
+    return (
+        <div className='relative w-full h-full flex flex-col gap-4'>
+            {message && <BottomAlert message={message} />}
+            <div className='flex flex-col md:flex-row justify-end gap-2'>
+                {
+                    pages.map((item) => {
+                        return <button key={item.id} onClick={
+                            () => {
+                                setCurrentPage(item.id)
+                            }
+                        } className={`bg-slate-300 text-black p-2 rounded-md ${currentPage === item.id ? 'bg-slate-600 text-white' : ''} hover:bg-slate-600 hover:text-white `}>{item.name}</button>
+                    })
+                }
+            </div>
             {
-                pages.map((item) => {
-                    return <button key={item.id} onClick={
-                        () => {
-                            setCurrentPage(item.id)
-                        }
-                    } className={`bg-slate-300 text-black p-2 rounded-md ${currentPage === item.id ? 'bg-slate-600 text-white' : ''} hover:bg-slate-600 hover:text-white `}>{item.name}</button>
-                })
+                currentPage === 'ALL_ORDERS' && <AllOrdersComponent />
+
+            }
+            {
+                currentPage === 'ORDERED' && <OrderedItemsComponent />
+            }
+            {
+                currentPage === 'PROCCESSED' && <ProcessedOrdersComponent />
+            }
+            {
+                currentPage === 'CANCELLED' && <CancelledOrdersComponent />
+            }
+            {
+                currentPage === 'TRANSIT' && <TransitOrdersComponent />
+            }
+            {
+                currentPage === 'DELIVERED' && <DeliveredOrdersComponent />
+            }
+            {
+                currentPage === 'SEARCH' && <SearchOrdersComponent />
             }
         </div>
-        {
-            currentPage === 'ALL_ORDERS' && <AllOrdersComponent />
-
-        }
-        {
-            currentPage === 'ORDERED' && <OrderedItemsComponent />
-        }
-        {
-            currentPage === 'PROCCESSED' && <ProcessedOrdersComponent />
-        }
-        {
-            currentPage === 'CANCELLED' && <CancelledOrdersComponent />
-        }
-        {
-            currentPage === 'TRANSIT' && <TransitOrdersComponent />
-        }
-        {
-            currentPage === 'DELIVERED' && <DeliveredOrdersComponent />
-        }
-        {
-            currentPage === 'SEARCH' && <SearchOrdersComponent />
-        }
-
-
-    </div>
+    )
 }
 export default OrdersPage;

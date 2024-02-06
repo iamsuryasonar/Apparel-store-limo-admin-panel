@@ -64,7 +64,7 @@ const Navbar = () => {
         {
             loading && <LoadingBar />
         }
-        <div className='w-full h-20 fixed top-0 left-0 right-0 px-6 shadow-md bg-white z-10 flex items-center'>
+        <div className=' w-full h-20 fixed top-0 left-0 right-0 px-6 shadow-md bg-white z-10 flex items-center'>
             <div className=" w-full mx-auto max-w-screen-lg font-sans flex flex-row justify-between items-center">
                 <Link to="/" className="text-xl font-bold hover:scale-110 transition-all duration-300 ease-in-out uppercase">Limo<span className="text-blue-600">Store</span></Link>
                 <div className="hidden md:flex md:flex-row md:justify-between md:gap-4 text-base  items-center">

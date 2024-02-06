@@ -5,9 +5,8 @@ function NavAndOutlet() {
     return (
         <>
             <Navbar />
-            <div className='w-screen h-20'></div>
-            <div className='w-screen '>
-                <div className='mx-auto max-w-4xl min-h-svh bg-slate-50 p-6'>
+            <div className='w-auto mt-20 overflow-hidden '>
+                <div className=' mx-auto max-w-4xl min-h-svh bg-slate-50 p-6'>
                     <Outlet />
                 </div>
             </div>
