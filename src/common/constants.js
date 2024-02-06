@@ -1,5 +1,5 @@
 const baseUrl = import.meta.env.VITE_BASE_URL;
-// export const API_URL = 'http://localhost:3001/admin/api/v1/';
+// export const baseUrl = 'http://localhost:3001/admin/api/v1/';
 export const API_URL = baseUrl + '/admin/api/v1/';
 export const LOCAL_STORAGE_NAME = 'limoADMIN';
 
