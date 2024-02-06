@@ -36,7 +36,7 @@ function SearchOrdersComponent() {
                 onClick={
                     onSearchHandler
                 }
-                className="w-24 text-xl font-thin h-10  aspect-square bg-slate-500 active:bg-slate-600 text-white"
+                className="w-24 text-xl font-thin h-10  aspect-square bg-slate-600 hover:bg-black text-white  active:bg-black"
                 type="button"
             >
                 Search
@@ -83,7 +83,7 @@ function SearchOrdersComponent() {
                                 onClick={() => {
                                     updateOrderStatusHandler(order?._id)
                                 }}
-                                className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-500  text-white"
+                                className="text-xl font-thin w-full my-4 h-10 aspect-square bg-slate-600 hover:bg-black text-white active:bg-black"
                                 type="button"
                             >
                                 Update
