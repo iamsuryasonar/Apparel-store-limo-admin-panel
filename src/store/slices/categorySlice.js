@@ -38,6 +38,7 @@ export const add_category = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await categoryServices.addCategory(data);
+            thunkAPI.dispatch(get_all_categories());
             return response.categories;
         } catch (error) {
             if (error.response.data.code === 401) {

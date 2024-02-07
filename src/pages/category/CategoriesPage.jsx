@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { add_category, get_all_categories, update_category } from '../../store/slices/categorySlice';
 import BottomAlert from '../../components/BottomAlert'
@@ -16,6 +16,7 @@ function CategoriesPage() {
     const [image, setImage] = useState(null);
     const [updatedImage, setUpdatedImage] = useState('');
     const [loadedImages, setLoadedImages] = useState([]);
+    const inputFileRef = useRef(null);
 
     const onNameChange = (e) => {
         setName(e.target.value)
@@ -37,6 +38,7 @@ function CategoriesPage() {
             name: name,
             image: image,
         }));
+        clearFileInput()
     }
 
 
@@ -50,6 +52,7 @@ function CategoriesPage() {
         }
 
         dispatch(update_category(data));
+        clearFileInput()
     }
 
 
@@ -59,8 +62,16 @@ function CategoriesPage() {
 
 
     useEffect(() => {
-        dispatch(get_all_categories());
+        dispatch(get_all_categories())
     }, [])
+
+    const clearFileInput = () => {
+        setName('');
+        setImage(null);
+        if (inputFileRef.current) {
+            inputFileRef.current.value = ''; // Reset the input value to empty
+        }
+    };
 
     return (
         <>
@@ -72,8 +83,8 @@ function CategoriesPage() {
                     </p>
                     <div className='w-full h-[1px] bg-slate-400 m-2'></div>
                     <form className="w-full flex flex-col gap-6 font-light ">
-                        <input onChange={onNameChange} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
-                        <input onChange={e => onImageChange(e.target.files[0])} name='image' type="file" accept='image/*' placeholder='image' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
+                        <input onChange={onNameChange} value={name} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                        <input onChange={e => onImageChange(e.target.files[0])} ref={inputFileRef} name='image' type="file" accept='image/*' placeholder='image' className="w-full p-1 border-[1px] rounded-sm border-black placeholder:p-2 "></input>
                     </form>
                     <button
                         onClick={addCategoryHandler}
@@ -109,7 +120,7 @@ function CategoriesPage() {
                                         setVisible(!isVisible);
                                         setUpdatedName(category.name);
                                         setCategoryStatus(category.isActive)
-                                    }} className='px-6 py-2 self-center bg-slate-600 hover:bg-black text-white  active:bg-black'>Edit</button>
+                                    }} className='px-6 py-2 self-center bg-slate-600 hover:bg-black text-white  active:bg-black'>{isVisible && (selectedCategory._id === category._id) ? 'Done' : 'Edit'}</button>
                                 </div>
                                 {
                                     isVisible && (selectedCategory._id === category._id) && (

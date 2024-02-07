@@ -118,7 +118,6 @@ const update_product_info = async (data) => {
 
 
 const add_size_variant = async (data) => {
-
     const formData = new FormData();
     //size variant info
     formData.append("name", data.sizeVariant.name);
@@ -129,7 +128,7 @@ const add_size_variant = async (data) => {
 
     const response = await axios
         .post(
-            API_URL + 'product/add_size/' + data.colorVariantId, formData, getMultipartheaders()
+            API_URL + `product/add_size/${data.colorVariantId}`, formData, getMultipartheaders()
         )
     return response.data.results
 }

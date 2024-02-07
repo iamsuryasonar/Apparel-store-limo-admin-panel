@@ -70,6 +70,7 @@ export const add_color_and_its_size_variant = createAsyncThunk(
             const response = await productServices.add_color_size_variant(body);
             thunkAPI.dispatch(get_a_product(body.productId));
             thunkAPI.dispatch(get_all_products());
+            thunkAPI.dispatch(setMessage('Variant added!'));
             return response.results.product;
         } catch (error) {
             if (error.response.data.code === 401) {

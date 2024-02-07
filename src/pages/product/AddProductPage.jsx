@@ -4,6 +4,7 @@ import { add_product } from '../../store/slices/productsSlice';
 import { get_all_categories } from '../../store/slices/categorySlice';
 import AddColorVariant from './components/AddColorVariant';
 import { useNavigate } from 'react-router-dom'
+import BottomAlert from '../../components/BottomAlert'
 
 function AddProductPage() {
     const dispatch = useDispatch();

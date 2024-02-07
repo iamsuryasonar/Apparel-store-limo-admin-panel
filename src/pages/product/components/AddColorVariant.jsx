@@ -126,7 +126,7 @@ function AddColorVariant({ task, product, handler }) {
                         {imageValues.length < 4 && (
                             <button
                                 onClick={() => addImageField()}
-                                className="text-2xl w-full h-10 aspect-square bg-slate-300 text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
+                                className="bg-slate-300  text-2xl w-full h-10 aspect-square  text-black hover:bg-slate-600 hover:text-white active:bg-slate-600 active:text-white"
                                 type="button"
                             >
                                 +

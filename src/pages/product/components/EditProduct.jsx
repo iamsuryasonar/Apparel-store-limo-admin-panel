@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleIsPublished, add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image, get_a_product } from '../../../store/slices/productSlice';
+import { toggleIsPublished, add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image, get_a_product, clearProduct } from '../../../store/slices/productSlice';
 import { faXmark, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddColorVariant from './AddColorVariant'
@@ -8,7 +8,7 @@ import AddColorVariant from './AddColorVariant'
 function EditProduct({ onComponentToggle, categories, productId }) {
 
     const dispatch = useDispatch();
-    const product = useSelector((state) => state.product.product);
+    const product = useSelector((state) => state?.product?.product);
     const [showColorVariant, setShowColorVariant] = useState(true);
     const [showColorVariantForm, setShowColorVariantForm] = useState(false)
     const [showUpdateButton, setShowUpdateButton] = useState(false)
@@ -51,6 +51,9 @@ function EditProduct({ onComponentToggle, categories, productId }) {
 
     useEffect(() => {
         dispatch(get_a_product(productId))
+        return () => {
+            dispatch(clearProduct())
+        }
     }, [])
 
     const onProductChange = (e) => {
@@ -121,9 +124,11 @@ function EditProduct({ onComponentToggle, categories, productId }) {
     };
 
     let updateProductInfoHandler = () => {
+        console.log(productValues.category)
         let data = {
             product: productValues,
-            productId: product?.id
+            productId: product?.id,
+            categoryId: productValues.category,
         }
 
         if (product?.id) {
@@ -148,7 +153,7 @@ function EditProduct({ onComponentToggle, categories, productId }) {
     return (
         <>
             {!product && <></>}
-            <div className='w-full grid place-content-center'>
+            <div className='w-full grid'>
                 <div className='flex flex-row justify-between'>
                     <p className='text-bold text-2xl'>Update Product</p>
                     <FontAwesomeIcon className="text-3xl hover:scale-150 transition-all duration-300 ease-in-out " icon={faXmark} onClick={onComponentToggle} />
@@ -157,10 +162,22 @@ function EditProduct({ onComponentToggle, categories, productId }) {
                     <div className='w-full place-self-center my-10 '>
                         <div className="w-full p-2 flex flex-col justify-center items-center border-[1px] border-black">
                             <form className="w-full m-2 flex flex-col gap-6 font-light ">
-                                <input onChange={onProductChange} value={productValues.name} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
-                                <input onChange={onProductChange} value={productValues.description} name='description' type="text" placeholder='Description' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
-                                <input onChange={onProductChange} value={productValues.keyword} name='keyword' type="text" placeholder='Keyword' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
-                                <input onChange={onProductChange} value={productValues.tag} name='tag' type="text" placeholder='Tag' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                                {product ?
+                                    <>
+                                        <input onChange={onProductChange} value={productValues.name} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                                        <input onChange={onProductChange} value={productValues.description} name='description' type="text" placeholder='Description' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                                        <input onChange={onProductChange} value={productValues.keyword} name='keyword' type="text" placeholder='Keyword' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                                        <input onChange={onProductChange} value={productValues.tag} name='tag' type="text" placeholder='Tag' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                                    </>
+                                    :
+                                    <>
+                                        <div className='rounded-sm w-full h-8 bg-slate-200 animate-pulse'></div>
+                                        <div className='rounded-sm w-full h-8 bg-slate-200 animate-pulse'></div>
+                                        <div className='rounded-sm w-full h-8 bg-slate-200 animate-pulse'></div>
+                                        <div className='rounded-sm w-full h-8 bg-slate-200 animate-pulse'></div>
+                                    </>
+                                }
+
                                 <select onChange={onProductChange} value={productValues.category} name='category' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
                                     {categories?.map((category) => {
                                         return <option key={category._id} value={category._id} className=''> {category.name}</option>
@@ -173,14 +190,14 @@ function EditProduct({ onComponentToggle, categories, productId }) {
                             </div>
                         </div>
                         <div className='w-full h-[1px] my-2 bg-slate-300'></div>
-                        <p className='self-start' >Color Variant:</p>
+                        <p className='self-start ' >Color Variant:</p>
                         <div className='w-full h-[1px] my-2 bg-slate-300'></div>
                         {/* list of color variants*/}
                         <div className='w-full flex flex-row gap-4'>
                             {product?.colorvariants?.map((item, index, arr) => {
                                 return <img key={item._id} onClick={() => { setSelectedColorVariant(index); setShowColorVariant(true); setShowColorVariantForm(false); }} className={`w-10 h-10 my-4 rounded-full ${selectedColorVariant === index ? ` border-4 border-black` : ``}`} src={arr[index]?.thumbnail.url}></img>
                             })}
-                            <div onClick={() => { setShowColorVariantForm(true); setShowColorVariant(false) }} className='w-10 h-10 my-4 rounded-full  border-4 border-slate-400 text-4xl flex justify-center items-center'>+</div>
+                            <div onClick={() => { setShowColorVariantForm(true); setShowColorVariant(false) }} className='w-10 h-10 my-4 rounded-full  border-4 border-slate-400 text-4xl flex justify-center items-center cursor-pointer'>+</div>
                         </div>
                         {/* when clicked on color image above this becomes visible */}
                         {showColorVariant &&
@@ -222,7 +239,7 @@ function EditProduct({ onComponentToggle, categories, productId }) {
                                 <div className='w-full h-[1px] my-2 bg-slate-300'></div>
                                 <p>Size variants:</p>
                                 <div className='w-full h-[1px] my-2 bg-slate-300'></div>
-                                <div className='flex flex-col gap-2'>
+                                <div className='w-full flex flex-col gap-2'>
                                     {
                                         product?.colorvariants[selectedColorVariant].sizevariants.map((size, index, arr) => {
                                             return <div key={size._id} className='flex flex-col justify-between gap-4 '>
@@ -271,7 +288,7 @@ function EditProduct({ onComponentToggle, categories, productId }) {
                                 </div>
                                 {(product?.colorvariants[selectedColorVariant].sizevariants.length < 7) &&
                                     <>
-                                        <AddSizeComponent />
+                                        <AddSizeComponent product={product} selectedColorVariant={selectedColorVariant} />
                                     </>
                                 }
                             </>
@@ -288,8 +305,8 @@ function EditProduct({ onComponentToggle, categories, productId }) {
 export default EditProduct;
 
 
-function AddSizeComponent() {
-
+function AddSizeComponent({ product, selectedColorVariant }) {
+    const dispatch = useDispatch();
     const [sizeValues, setSizeValues] = useState(
         {
             name: '',
@@ -310,7 +327,8 @@ function AddSizeComponent() {
     let addSizeVariantHandler = () => {
         let data = {
             sizeVariant: sizeValues,
-            colorVariantId: product?.colorvariants[selectedColorVariant]._id
+            colorVariantId: product?.colorvariants[selectedColorVariant]._id,
+            productId: product?._id,
         }
         if (product?.colorvariants[selectedColorVariant]._id) {
             dispatch(add_size_variant(data));
@@ -318,6 +336,7 @@ function AddSizeComponent() {
         else {
             console.log('product id not found!!')
         }
+
     }
     return <div className='flex flex-col gap-2'>
         <p>Add Size: </p>
@@ -336,7 +355,7 @@ function AddSizeComponent() {
             </div>
         </form>
         <button
-            onClick={() => addSizeVariantHandler()}
+            onClick={addSizeVariantHandler}
             className="text-xl w-full h-10 aspect-square bg-slate-600 hover:bg-black text-white  active:bg-black"
             type="button"
         >
