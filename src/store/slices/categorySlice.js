@@ -10,7 +10,7 @@ export const get_all_categories = createAsyncThunk(
         try {
             thunkAPI.dispatch(setLoading(true));
             const response = await categoryServices.getAllCategories();
-            return response.categories;
+            return response;
         } catch (error) {
             if (error.response.data.code === 401) {
                 thunkAPI.dispatch(logout());
@@ -39,7 +39,7 @@ export const add_category = createAsyncThunk(
             thunkAPI.dispatch(setLoading(true));
             const response = await categoryServices.addCategory(data);
             thunkAPI.dispatch(get_all_categories());
-            return response.categories;
+            return response;
         } catch (error) {
             if (error.response.data.code === 401) {
                 thunkAPI.dispatch(logout());
@@ -69,7 +69,7 @@ export const update_category = createAsyncThunk(
             thunkAPI.dispatch(setLoading(true));
             const response = await categoryServices.updateCategory(data);
             thunkAPI.dispatch(get_all_categories());
-            return response.categories;
+            return response;
         } catch (error) {
             if (error.response.data.code === 401) {
                 thunkAPI.dispatch(logout());
