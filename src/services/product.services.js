@@ -19,12 +19,23 @@ const getMultipartheaders = () => {
     return { headers }
 }
 
+const getAllOrders = async (data) => {
+    const response = await axios
+        .get(API_URL + 'order/', {
+            params: {
+                page: data.pageNo,
+                limit: data.limit,
+                filter: data.filterInfo,
+            }, headers: getheaders()
+        },)
+    return response.data
+}
+
 const get_a_product = async (id) => {
     const response = await axios
         .get(API_URL + 'product/' + id, { headers: getheaders() })
     return response.data
 }
-
 
 const add_color_size_variant = async (data) => {
     const formData = new FormData();
@@ -46,7 +57,7 @@ const add_color_size_variant = async (data) => {
 
     const response = await axios
         .put(
-            API_URL + 'product/addcolorandsizes', formData, getMultipartheaders()
+            API_URL + 'product/add_color_and_sizes', formData, getMultipartheaders()
         )
     return response.data.results
 }
@@ -54,7 +65,7 @@ const add_color_size_variant = async (data) => {
 const toggleIsPublished = async (productId) => {
     const response = await axios
         .put(
-            API_URL + 'product/toggleIsPublished/' + productId, {}, { headers: getheaders() }
+            API_URL + 'product/toggle_is_published/' + productId, {}, { headers: getheaders() }
         )
     return response.data.results
 }
@@ -114,8 +125,6 @@ const update_product_info = async (data) => {
         )
     return response.data.results
 }
-
-
 
 const add_size_variant = async (data) => {
     const formData = new FormData();

@@ -19,12 +19,6 @@ const getMultipartheaders = () => {
     return { headers }
 }
 
-const getAllCategories = async () => {
-    const response = await axios
-        .get(API_URL + 'category/', { headers: getheaders() })
-    return response.data.results
-}
-
 const getAllProducts = async (pagination_info) => {
     const response = await axios
         .get(API_URL + 'product/', {
@@ -96,7 +90,7 @@ const add_color_size_variant = async (data) => {
 
     const response = await axios
         .put(
-            API_URL + 'product/addcolorandsizes', formData, getMultipartheaders()
+            API_URL + 'product/add_color_and_sizes', formData, getMultipartheaders()
         )
     return response.data.results
 }
@@ -104,7 +98,7 @@ const add_color_size_variant = async (data) => {
 const toggleIsPublished = async (productId) => {
     const response = await axios
         .put(
-            API_URL + 'product/toggleIsPublished/' + productId, {}, { headers: getheaders() }
+            API_URL + 'product/toggle_is_published/' + productId, {}, { headers: getheaders() }
         )
     return response.data.results
 }
@@ -221,7 +215,6 @@ const productsServices = {
     update_thumbnail,
     add_image,
     update_image,
-    getAllCategories,
 }
 
 export default productsServices;

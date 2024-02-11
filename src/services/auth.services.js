@@ -8,11 +8,11 @@ let headersList = {
 }
 
 const register = (creds) => {
-    return axios.post(API_URL + 'auth/adminRegister', creds)
+    return axios.post(API_URL + 'auth/admin_register', creds)
 }
 
 const login = async (creds) => {
-    const response = await axios.post(API_URL + 'auth/adminLogin', creds);
+    const response = await axios.post(API_URL + 'auth/admin_login', creds);
     return response.data.results;
 }
 
