@@ -7,10 +7,9 @@ import { useState, useEffect } from 'react';
 import BottomAlert from '../../components/BottomAlert'
 
 function LogInPage() {
-    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { message } = useSelector((state) => state.message);
+    // const { message } = useSelector((state) => state.message);
 
     const [input, setInput] = useState({});
 
@@ -27,20 +26,15 @@ function LogInPage() {
 
     const logInHandler = (e) => {
         e.preventDefault();
-        setLoading(true);
         dispatch(login(input))
             // .unwrap()
             .then(() => {
                 navigate("/dashboard");
             })
-            .catch(() => {
-                setLoading(false);
-            });
     }
 
-
     return (<>
-        {message && <BottomAlert message={message} />}
+        {/* {message && <BottomAlert message={message} />} */}
         <div className='w-full flex justify-center'>
             <div className=" max-w-md w-full mt-10 flex flex-col justify-center items-start gap-4">
                 <h1 className="font-extrabold text-4xl">LOG IN</h1>

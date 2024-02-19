@@ -71,7 +71,7 @@ function SearchOrdersComponent() {
                         </div>
                         <div className='w-full p-4 border-[1px] border-black'>
                             <form className="w-full flex flex-col gap-6 font-light">
-                                <select onChange={(e) => { setOrderStatus(e.target.value) }} value={order?.status} className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2'>
+                                <select onChange={(e) => { setOrderStatus(e.target.value) }} value={orderStatus === '' ? order?.status : orderStatus} className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2'>
                                     {
                                         ORDERSTATUS?.map((status) => {
                                             return <option key={status} value={status} className=''> {status}</option>

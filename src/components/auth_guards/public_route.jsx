@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux';
 import { initialiseUser } from '../../store/slices/authSlice';
 import { useEffect, useState, useMemo } from 'react'
 import { Outlet } from 'react-router-dom';
-const PublicRoute = ({ userData, children }) => {
-    const dispatch = useDispatch()
+const PublicRoute = ({ userData }) => {
     const accessToken = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME))?.accessToken;
 
     const isAuthenticated = useMemo(() => {

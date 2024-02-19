@@ -1,7 +1,7 @@
 import ImageCarousal from '../../../components/ImageCarousal'
 import { ORDERSTATUS } from '../../../common/constants'
 
-function OrderModal({ modalItem, modalVisible, setModalItem, setModalVisibility, setOrderStatus, updateOrderStatusHandler }) {
+function OrderModal({ modalItem, modalVisible, setModalItem, setModalVisibility, orderStatus, setOrderStatus, updateOrderStatusHandler }) {
     return (
         <div className="z-10 fixed inset-0 w-full h-full  bg-opacity-50 flex items-center justify-center bg-black/[.8]">
             <div className='bg-slate-200 relative w-full md:w-4/5 lg:w-[700px] h-3/4 p-5 '>
@@ -42,7 +42,7 @@ function OrderModal({ modalItem, modalVisible, setModalItem, setModalVisibility,
                             </div>
                             <div className='w-full p-4 border-[1px] border-black'>
                                 <form className="w-full flex flex-col gap-6 font-light">
-                                    <select onChange={(e) => { setOrderStatus(e.target.value) }} value={modalItem.status} className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2'>
+                                    <select onChange={(e) => { setOrderStatus(e.target.value); }} value={orderStatus === '' ? modalItem.status : orderStatus} className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2'>
                                         {
                                             ORDERSTATUS?.map((status) => {
                                                 return <option key={status} value={status} className=''> {status}</option>

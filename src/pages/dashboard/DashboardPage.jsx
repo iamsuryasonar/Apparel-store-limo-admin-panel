@@ -1,23 +1,25 @@
 // src/App.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faWallet, faUser, faPerson } from '@fortawesome/free-solid-svg-icons'
+import {
+    faCartShopping, faWallet, faUser, faPerson, faPeopleCarryBox, faBoxOpen, faBoxesStacked, faTruck, faTruckRampBox, faRotateLeft
+} from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
 import BottomAlert from '../../components/BottomAlert'
+import AnalyticsServices from '../../services/analytics.services'
 
-const Widget = ({ title, icon }) => {
+const Widget = ({ numbers, title, icon }) => {
     return (
         <div className='bg-slate-200 p-4 rounded-lg '>
             <div className='flex justify-between'>
                 <h1>{title}</h1>
-                <p>+12%</p>
             </div>
             <div className='flex justify-between my-4'>
                 <div className='w-8 h-8 bg-slate-500 rounded-full grid'><FontAwesomeIcon className='place-self-center text-white' icon={icon} /></div>
-                <p>421</p>
+                <p>{numbers}</p>
             </div>
-            <Link to='/' className='underline underline-offset-4 text-blue-400 hover:text-blue-600'>View more...</Link>
+            {/* <Link to='/' className='underline underline-offset-4 text-blue-400 hover:text-blue-600'>View more...</Link> */}
         </div>
     )
 
@@ -95,16 +97,29 @@ const LatestOrdersCard = () => {
 
 const DashboardPage = () => {
     const message = useSelector((state) => state.message.message);
+    const [analytics, setAnalytics] = useState(null);
+
+    const getAnalytics = async () => {
+        const result = await AnalyticsServices.getAnalytics();
+        setAnalytics(result);
+    }
+    useEffect(() => {
+        getAnalytics()
+    }, [])
 
     return (
         <div className='w-full '>
+            {console.log(analytics)}
             {message && <BottomAlert message={message} />}
             <div className='w-full my-10 flex flex-col items-center justify-center gap-4 '>
                 <div className='w-full  grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-                    <Widget title={'Total Orders'} icon={faCartShopping} />
-                    <Widget title={'Total Sales'} icon={faWallet} />
-                    <Widget title={'New Customer'} icon={faUser} />
-                    <Widget title={'Users Online'} icon={faPerson} />
+                    <Widget numbers={analytics?.totalOrders} title={'Total Orders'} icon={faBoxesStacked} />
+                    <Widget numbers={analytics?.totalOrderedOrders} title={'Orders'} icon={faBoxOpen} />
+                    <Widget numbers={analytics?.totalProcessedOrders} title={'Processed'} icon={faCartShopping} />
+                    <Widget numbers={analytics?.totalTransitOrders} title={'In Transit'} icon={faTruck} />
+                    <Widget numbers={analytics?.totalDeliveredOrders} title={'Total Delivered'} icon={faTruckRampBox} />
+                    <Widget numbers={analytics?.totalCancelledOrders} title={'Cancelled'} icon={faRotateLeft} />
+
                 </div>
                 <BestSellerCard />
                 <RevenueGraphCard />

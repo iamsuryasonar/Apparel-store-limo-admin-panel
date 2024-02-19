@@ -44,16 +44,16 @@ function ProcessedOrdersComponent() {
         <>
             <div className={`w-auto h-auto flex flex-col justify-center items-center`}>
                 <div className='place-self-end'>
-                    <FilterDropdown toggleDropdown={toggleDropdown} setToggleDropdown={setToggleDropdown} setFilterInfo={setFilterInfo} />
+                    <FilterDropdown filterInfo={filterInfo}  toggleDropdown={toggleDropdown} setToggleDropdown={setToggleDropdown} setFilterInfo={setFilterInfo} />
                 </div>
                 <OrderList orders={orders?.orders} modalVisible={modalVisible}  setModalItem={setModalItem} setModalVisibility={setModalVisibility} />
 
                 {orders?.pagination?.total_orders === 0 && <p className='self-end'>No orders found </p>}
                 <div className='h-[1px] bg-slate-500 my-2'></div>
-                <Pagination currentPage={currentPage} totalPages={orders?.pagination.total_pages} totalOrders={orders?.pagination.total_orders} handlePageChange={handlePageChange} />
+                <Pagination perPage={orders?.pagination.per_page}  currentPage={currentPage} totalPages={orders?.pagination.total_pages} totalOrders={orders?.pagination.total_orders} handlePageChange={handlePageChange} />
             </div>
             {modalVisible &&
-                <OrderModal modalItem={modalItem} modalVisible={modalVisible} setModalItem={setModalItem} setModalVisibility={setModalVisibility} setOrderStatus={setOrderStatus} updateOrderStatusHandler={updateOrderStatusHandler} />
+                <OrderModal modalItem={modalItem} modalVisible={modalVisible} setModalItem={setModalItem} setModalVisibility={setModalVisibility} orderStatus={orderStatus}  setOrderStatus={setOrderStatus} updateOrderStatusHandler={updateOrderStatusHandler} />
             }
         </>
     )

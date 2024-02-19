@@ -4,9 +4,10 @@ import { initialiseUser } from '../../store/slices/authSlice';
 import { useEffect, useState, useMemo } from 'react'
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const PrivateRoute = ({ userData }) => {
-
+    const location = useLocation();
     const dispatch = useDispatch()
     const accessToken = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME))?.accessToken;
 
@@ -21,10 +22,11 @@ const PrivateRoute = ({ userData }) => {
             dispatch(initialiseUser());
         }
     }, [dispatch, userData, accessToken, isAuthenticated]);
+
     return isAuthenticated(userData, accessToken) ? (
         <Outlet />
     ) : (
-        <Navigate to="/sign-up" />
+        <Navigate to="/" />
     )
 
 }

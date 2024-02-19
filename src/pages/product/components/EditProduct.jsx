@@ -124,7 +124,6 @@ function EditProduct({ onComponentToggle, categories, productId }) {
     };
 
     let updateProductInfoHandler = () => {
-        console.log(productValues.category)
         let data = {
             product: productValues,
             productId: product?.id,

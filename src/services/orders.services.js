@@ -41,10 +41,11 @@ const getAnOrder = async (id) => {
 
 const getAllProcessedOrders = async (data) => {
     const response = await axios
-        .get(API_URL + 'order/status/' + 'PROCESSED', {
+        .get(API_URL + 'order/status/' + 'PROCCESSED', {
             params: {
                 page: data.pageNo,
                 limit: data.limit,
+                filter: data.filterInfo,
             }, headers: getheaders()
         },)
     return response.data
@@ -56,18 +57,19 @@ const getAllCancelledOrders = async (data) => {
             params: {
                 page: data.pageNo,
                 limit: data.limit,
+                filter: data.filterInfo,
             }, headers: getheaders()
         },)
     return response.data
 }
 
 const getAllOrderedOrders = async (data) => {
-
     const response = await axios
         .get(API_URL + 'order/status/' + 'ORDERED', {
             params: {
                 page: data.pageNo,
                 limit: data.limit,
+                filter: data.filterInfo,
             }, headers: getheaders()
         },)
     return response.data
@@ -79,6 +81,7 @@ const getAllDeliveredOrders = async (data) => {
             params: {
                 page: data.pageNo,
                 limit: data.limit,
+                filter: data.filterInfo,
             }, headers: getheaders()
         },)
     return response.data
@@ -90,6 +93,7 @@ const getAllTransitOrders = async (data) => {
             params: {
                 page: data.pageNo,
                 limit: data.limit,
+                filter: data.filterInfo,
             }, headers: getheaders()
         },)
     return response.data

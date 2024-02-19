@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slices/authSlice'
 import LoadingBar from './LoadingBar';
+import BottomAlert from '../components/BottomAlert';
 
 const Navbar = () => {
     const [menu, setMenu] = useState(false);
@@ -14,6 +15,7 @@ const Navbar = () => {
 
     const user = useSelector((state) => state.auth.userData);
     const loading = useSelector((state) => state.loading.loading);
+    const message = useSelector((state) => state.message.message);
     const currentPageName = location.pathname;
 
     const toggle = () => {
@@ -110,6 +112,7 @@ const Navbar = () => {
                 }
             </div>}
         </div>
+        <BottomAlert message={message} />
     </>
 };
 
