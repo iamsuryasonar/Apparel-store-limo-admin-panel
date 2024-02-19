@@ -116,7 +116,7 @@ const DashboardPage = () => {
                     <Widget numbers={analytics?.totalOrders} title={'Total Orders'} icon={faBoxesStacked} />
                     <Widget numbers={analytics?.totalOrderedOrders} title={'Orders'} icon={faBoxOpen} />
                     <Widget numbers={analytics?.totalProcessedOrders} title={'Processed'} icon={faCartShopping} />
-                    <Widget numbers={analytics?.totalTransitOrders} title={'In Transit'} icon={faTruck} />
+                    <Widget numbers={analytics?.totalInTransitOrders} title={'In Transit'} icon={faTruck} />
                     <Widget numbers={analytics?.totalDeliveredOrders} title={'Total Delivered'} icon={faTruckRampBox} />
                     <Widget numbers={analytics?.totalCancelledOrders} title={'Cancelled'} icon={faRotateLeft} />
 
