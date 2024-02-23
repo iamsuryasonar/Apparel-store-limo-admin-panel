@@ -4,7 +4,7 @@ import { faXmark, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddColorVariant from './AddColorVariant'
 import { toggleIsPublished, add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image, get_a_product, clearProduct } from '../../../store/slices/productSlice';
-import { PRODUCT_TAG } from '../../../common/constants';
+import { PRODUCT_TAG, GENDERS } from '../../../common/constants';
 
 function EditProduct({ onComponentToggle, categories, productId }) {
     const dispatch = useDispatch();
@@ -18,6 +18,7 @@ function EditProduct({ onComponentToggle, categories, productId }) {
         {
             name: '',
             description: '',
+            gender: '',
             keyword: '',
             tag: '',
             category: '',
@@ -170,6 +171,11 @@ function EditProduct({ onComponentToggle, categories, productId }) {
                                         <select onChange={onProductChange} value={productValues.tag} name='tag' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
                                             {PRODUCT_TAG?.map((tag) => {
                                                 return <option key={tag} value={tag} className=''> {tag}</option>
+                                            })}
+                                        </select>
+                                        <select onChange={onProductChange} value={productValues.gender} name='gender' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
+                                            {GENDERS?.map((gender) => {
+                                                return <option key={gender} value={gender} className=''> {gender}</option>
                                             })}
                                         </select>
                                     </>

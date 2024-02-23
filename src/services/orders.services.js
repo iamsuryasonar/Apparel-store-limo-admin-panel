@@ -41,7 +41,7 @@ const getAnOrder = async (id) => {
 
 const getAllProcessedOrders = async (data) => {
     const response = await axios
-        .get(API_URL + 'order/status/' + 'PROCCESSED', {
+        .get(API_URL + 'order/status/' + 'PROCESSED', {
             params: {
                 page: data.pageNo,
                 limit: data.limit,

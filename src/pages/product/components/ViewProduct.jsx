@@ -38,6 +38,7 @@ function ViewProduct({ onComponentToggle, productId }) {
                             <p>₹ {product?.colorvariants[selectedColorVariant].sizevariants[selectedSizeVariant].selling_price}</p>
                         </div>
                         <p className='text-xl text-slate-500'>{product?.colorvariants[selectedColorVariant].sizevariants[selectedSizeVariant].stock} items remaining</p>
+                        <p className='text-xl text-slate-500'>{product?.gender}</p>
                         <div className='w-full flex flex-row gap-4'>
                             {product?.colorvariants?.map((item, index, arr) => {
                                 return <img key={item._id} onClick={() => { setSelectedColorVariant(index); }} className={`w-10 h-10 my-4 rounded-full ${selectedColorVariant === index ? ` border-2 border-slate-500` : ``}`} src={arr[index]?.thumbnail.url}></img>

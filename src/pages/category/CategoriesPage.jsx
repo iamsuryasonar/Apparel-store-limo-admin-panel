@@ -2,6 +2,9 @@ import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import BottomAlert from '../../components/BottomAlert'
 import { add_category, get_all_categories, update_category } from '../../store/slices/categorySlice';
+import { setMessage, clearMessage } from '../../store/slices/messageSlice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function CategoriesPage() {
     const dispatch = useDispatch();
@@ -34,6 +37,21 @@ function CategoriesPage() {
     }
 
     let addCategoryHandler = () => {
+        if (!name) {
+            dispatch(setMessage('Category name required!'));
+            setTimeout(() => {
+                dispatch(clearMessage());
+            }, 3000);
+            return;
+        }
+        if (!image) {
+            dispatch(setMessage('Category Image required!'));
+            setTimeout(() => {
+                dispatch(clearMessage());
+            }, 3000);
+            return;
+        }
+
         dispatch(add_category({
             name: name,
             image: image,
@@ -120,7 +138,7 @@ function CategoriesPage() {
                                         setVisible(!isVisible);
                                         setUpdatedName(category.name);
                                         setCategoryStatus(category.isActive)
-                                    }} className='px-6 py-2 self-center bg-slate-600 hover:bg-black text-white  active:bg-black'>{isVisible && (selectedCategory._id === category._id) ? 'Done' : 'Edit'}</button>
+                                    }} className='px-6 py-2 self-center bg-slate-600 hover:bg-black text-white  active:bg-black'>{isVisible && (selectedCategory._id === category._id) ? <FontAwesomeIcon icon={faMinus} /> : <FontAwesomeIcon icon={faPlus} />}</button>
                                 </div>
                                 {
                                     isVisible && (selectedCategory._id === category._id) && (

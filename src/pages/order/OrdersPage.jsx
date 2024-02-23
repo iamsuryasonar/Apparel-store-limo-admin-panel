@@ -22,8 +22,8 @@ function OrdersPage() {
             id: 'ORDERED',
             name: 'ORDERED',
         }, {
-            id: 'PROCCESSED',
-            name: 'PROCCESSED',
+            id: 'PROCESSED',
+            name: 'PROCESSED',
         },
         {
             id: 'CANCELLED',
@@ -65,7 +65,7 @@ function OrdersPage() {
                 currentPage === 'ORDERED' && <OrderedItemsComponent />
             }
             {
-                currentPage === 'PROCCESSED' && <ProcessedOrdersComponent />
+                currentPage === 'PROCESSED' && <ProcessedOrdersComponent />
             }
             {
                 currentPage === 'CANCELLED' && <CancelledOrdersComponent />
