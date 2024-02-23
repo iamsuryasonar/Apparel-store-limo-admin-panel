@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { get_all_transit_products, update_order_status } from "../../../store/slices/transitProductsSlice";
 import Pagination from '../../../components/Pagination'
-import { filterItems } from '../../../common/constants'
 import OrderModal from './OrderModalComponent'
 import OrderList from './OrderListComponent'
 import FilterDropdown from './FilterDropdownComponent'
+import { get_all_transit_products, update_order_status } from "../../../store/slices/transitProductsSlice";
+import { filterItems } from '../../../common/constants'
 
 function TransitOrdersComponent() {
     const dispatch = useDispatch();

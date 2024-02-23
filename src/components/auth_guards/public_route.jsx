@@ -1,9 +1,7 @@
-import { Navigate } from 'react-router-dom';
+import { useMemo } from 'react'
+import { Navigate, Outlet } from 'react-router-dom';
 import { LOCAL_STORAGE_NAME } from '../../common/constants'
-import { useDispatch } from 'react-redux';
-import { initialiseUser } from '../../store/slices/authSlice';
-import { useEffect, useState, useMemo } from 'react'
-import { Outlet } from 'react-router-dom';
+
 const PublicRoute = ({ userData }) => {
     const accessToken = JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME))?.accessToken;
 

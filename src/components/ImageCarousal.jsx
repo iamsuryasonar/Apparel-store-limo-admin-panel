@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
-import LoadingSpinner from '../components/LoadingSpinner'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
+import LoadingSpinner from '../components/LoadingSpinner'
 
 
 function ImageCarousal({ images }) {

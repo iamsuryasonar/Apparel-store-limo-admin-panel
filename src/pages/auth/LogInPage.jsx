@@ -1,10 +1,8 @@
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import { useNavigate, Link } from 'react-router-dom';
 import { clearMessage } from '../../store/slices/messageSlice'
 import { login } from '../../store/slices/authSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import BottomAlert from '../../components/BottomAlert'
 
 function LogInPage() {
     const dispatch = useDispatch();

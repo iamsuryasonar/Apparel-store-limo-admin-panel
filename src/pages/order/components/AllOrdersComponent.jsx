@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { get_all_orders, update_order_status } from "../../../store/slices/ordersSlice";
 import Pagination from '../../../components/Pagination'
-import { filterItems } from '../../../common/constants'
 import OrderModal from './OrderModalComponent'
 import OrderList from './OrderListComponent'
 import FilterDropdown from './FilterDropdownComponent'
 import ScrollToTopButton from '../../../components/ScrollToTopButton'
+import { get_all_orders, update_order_status } from "../../../store/slices/ordersSlice";
+import { filterItems } from '../../../common/constants'
+
 function AllOrdersComponent() {
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.orders.orders);
@@ -40,7 +41,7 @@ function AllOrdersComponent() {
     };
 
     return (<>
-        <div className={`w-auto h-auto flex flex-col justify-center items-center`}>
+        <div className={`w-auto h-auto flex flex-col justify-center items-center `}>
             <div className='place-self-end '>
                 <FilterDropdown filterInfo={filterInfo} toggleDropdown={toggleDropdown} setToggleDropdown={setToggleDropdown} setFilterInfo={setFilterInfo} />
             </div>

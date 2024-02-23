@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { add_category, get_all_categories, update_category } from '../../store/slices/categorySlice';
 import BottomAlert from '../../components/BottomAlert'
+import { add_category, get_all_categories, update_category } from '../../store/slices/categorySlice';
 
 function CategoriesPage() {
     const dispatch = useDispatch();

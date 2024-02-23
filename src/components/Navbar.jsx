@@ -1,11 +1,11 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../store/slices/authSlice'
 import LoadingBar from './LoadingBar';
 import BottomAlert from '../components/BottomAlert';
+import { logout } from '../store/slices/authSlice'
 
 const Navbar = () => {
     const [menu, setMenu] = useState(false);

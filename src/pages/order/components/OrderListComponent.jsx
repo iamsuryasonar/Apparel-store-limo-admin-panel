@@ -29,11 +29,11 @@ function OrderList({ modalVisible, orders, setModalItem, setModalVisibility }) {
                         <div className='p-4 border-[1px] border-black'>
                             <p>Address Information:</p>
                             <p>Name:  {item.customer.firstName + ' ' + item.customer.lastName}</p>
-                            <p>Contact: {item.address.contactnumber}</p>
+                            <p>Contact: {item.contact_number}</p>
                             <p>Email: {item.customer.email}</p>
-                            <p>pin code: {item.address.pin}</p>
-                            <p>Town: {item.address.town}</p>
-                            <p>State: {item.address.state}</p>
+                            <p>pin code: {item.pin}</p>
+                            <p>Town: {item.town}</p>
+                            <p>State: {item.state}</p>
                         </div>
                         <div className='h-[1px] bg-slate-500 my-2'></div>
                     </div>

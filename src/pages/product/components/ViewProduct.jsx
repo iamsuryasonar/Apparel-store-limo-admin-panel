@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { get_a_product, clearProduct } from '../../../store/slices/productSlice';
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ImageCarousal from '../../../components/ImageCarousal';
+import { get_a_product, clearProduct } from '../../../store/slices/productSlice';
 
 function ViewProduct({ onComponentToggle, productId }) {
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleIsPublished, add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image, get_a_product, clearProduct } from '../../../store/slices/productSlice';
 import { faXmark, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddColorVariant from './AddColorVariant'
+import { toggleIsPublished, add_color_and_its_size_variant, update_product_info, add_size_variant, update_size_variant, update_thumbnail, update_image, add_image, get_a_product, clearProduct } from '../../../store/slices/productSlice';
+import { PRODUCT_TAG } from '../../../common/constants';
 
 function EditProduct({ onComponentToggle, categories, productId }) {
-
     const dispatch = useDispatch();
     const product = useSelector((state) => state?.product?.product);
     const [showColorVariant, setShowColorVariant] = useState(true);
@@ -166,7 +166,12 @@ function EditProduct({ onComponentToggle, categories, productId }) {
                                         <input onChange={onProductChange} value={productValues.name} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                                         <input onChange={onProductChange} value={productValues.description} name='description' type="text" placeholder='Description' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                                         <input onChange={onProductChange} value={productValues.keyword} name='keyword' type="text" placeholder='Keyword' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
-                                        <input onChange={onProductChange} value={productValues.tag} name='tag' type="text" placeholder='Tag' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                                        {/* <input onChange={onProductChange} value={productValues.tag} name='tag' type="text" placeholder='Tag' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input> */}
+                                        <select onChange={onProductChange} value={productValues.tag} name='tag' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
+                                            {PRODUCT_TAG?.map((tag) => {
+                                                return <option key={tag} value={tag} className=''> {tag}</option>
+                                            })}
+                                        </select>
                                     </>
                                     :
                                     <>

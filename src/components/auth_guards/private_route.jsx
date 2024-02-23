@@ -1,10 +1,9 @@
-import { Navigate } from 'react-router-dom';
-import { LOCAL_STORAGE_NAME } from '../../common/constants'
-import { initialiseUser } from '../../store/slices/authSlice';
 import { useEffect, useState, useMemo } from 'react'
+import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Outlet } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
+import { initialiseUser } from '../../store/slices/authSlice';
+import { LOCAL_STORAGE_NAME } from '../../common/constants'
 
 const PrivateRoute = ({ userData }) => {
     const location = useLocation();

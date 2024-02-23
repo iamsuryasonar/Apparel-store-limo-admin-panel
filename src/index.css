@@ -5,15 +5,15 @@
 
 /* Custom scrollbar */
 .scrollbar::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #e8e8e8;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-    background-color: #000000;
+    background-color: #565656;
     border-radius: 4px;
     scrollbar-width: thin;
 }

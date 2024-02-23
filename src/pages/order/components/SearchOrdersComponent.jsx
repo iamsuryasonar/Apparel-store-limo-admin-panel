@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ImageCarousal from '../../../components/ImageCarousal'
 import { get_an_order, update_order_status, clearOrder } from '../../../store/slices/orderSlice'
 import { clearMessage } from '../../../store/slices/messageSlice'
-import ImageCarousal from '../../../components/ImageCarousal'
 import { ORDERSTATUS } from '../../../common/constants'
 
 function SearchOrdersComponent() {

@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import BottomAlert from "../../components/BottomAlert";
 import { clearMessage } from '../../store/slices/messageSlice'
 import { register } from '../../store/slices/authSlice'
-import BottomAlert from "../../components/BottomAlert";
 
 function RegisterPage() {
 

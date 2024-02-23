@@ -1,11 +1,10 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCartShopping, faWallet, faUser, faPerson, faPeopleCarryBox, faBoxOpen, faBoxesStacked, faTruck, faTruckRampBox, faRotateLeft
+    faCartShopping, faBoxOpen, faBoxesStacked, faTruck, faTruckRampBox, faRotateLeft
 } from '@fortawesome/free-solid-svg-icons'
-import { useSelector } from 'react-redux'
 import BottomAlert from '../../components/BottomAlert'
 import AnalyticsServices from '../../services/analytics.services'
 

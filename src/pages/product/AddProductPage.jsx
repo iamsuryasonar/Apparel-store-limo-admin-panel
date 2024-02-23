@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { add_product } from '../../store/slices/productsSlice';
-import { get_all_categories } from '../../store/slices/categorySlice';
-import AddColorVariant from './components/AddColorVariant';
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import AddColorVariant from './components/AddColorVariant';
 import BottomAlert from '../../components/BottomAlert'
+import { get_all_categories } from '../../store/slices/categorySlice';
+import { add_product } from '../../store/slices/productsSlice';
+import { PRODUCT_TAG } from '../../common/constants';
 
 function AddProductPage() {
     const dispatch = useDispatch();
@@ -54,9 +55,16 @@ function AddProductPage() {
                     <input onChange={onProductChange} name='name' type="text" placeholder='Name' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                     <input onChange={onProductChange} name='description' type="text" placeholder='Description' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
                     <input onChange={onProductChange} name='keyword' type="text" placeholder='Keyword' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
-                    <input onChange={onProductChange} name='tag' type="text" placeholder='Tag' className="p-1 border-[1px] rounded-sm border-black w-full placeholder:p-2 "></input>
+                    <select onChange={onProductChange} name='tag' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
+                        <option value='' className=''>Select tag...</option>
+                        {
+                            PRODUCT_TAG?.map((tag) => {
+                                return <option key={tag} value={tag} className=''> {tag}</option>
+                            })
+                        }
+                    </select>
                     <select onChange={onProductChange} name='categoryId' className='p-1 border-[1px] bg-white rounded-sm border-black w-full placeholder:p-2  drop-shadow-sm'>
-                        <option value='' className=''>SELECT...</option>
+                        <option value='' className=''>Select category...</option>
                         {
                             categories?.map((category) => {
                                 return <option key={category._id} value={category._id} className=''> {category.name}</option>

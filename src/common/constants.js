@@ -5,6 +5,8 @@ export const LOCAL_STORAGE_NAME = 'limoADMIN';
 
 export const ORDERSTATUS = ['ORDERED', 'PROCCESSED', 'CANCELLED', 'TRANSIT', 'DELIVERED']
 
+export const PRODUCT_TAG = ['Popular', 'Most purchased', 'New arrival'];
+
 export const filterItems = {
     NEWEST_FIRST: "NEWEST_FIRST",
     OLDEST_FIRST: "OLDEST_FIRST"

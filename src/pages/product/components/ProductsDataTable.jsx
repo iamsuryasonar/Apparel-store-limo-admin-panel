@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState, useMemo } from 'react'
-import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import DataTable from 'react-data-table-component';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { clearMessage } from '../../../store/slices/messageSlice';
 import { get_all_products } from '../../../store/slices/productsSlice';
 

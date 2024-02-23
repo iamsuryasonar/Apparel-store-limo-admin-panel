@@ -1,8 +1,8 @@
-import ProductsDataTable from "./components/ProductsDataTable.jsx";
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import ProductsDataTable from "./components/ProductsDataTable.jsx";
 import EditProduct from './components/EditProduct.jsx';
 import BottomAlert from '../../components/BottomAlert.jsx'
-import { useState } from 'react'
 import ViewProduct from './components/ViewProduct.jsx'
 
 function ProductsPage() {
