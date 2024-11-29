@@ -25,8 +25,17 @@ const getAnalytics = async () => {
     return response.data.results
 }
 
+const getMostOrderedProducts = async () => {
+    const response = await axios
+        .get(API_URL + 'order/orders/most_ordered_products', {
+            headers: getheaders()
+        },)
+    return response.data.results
+}
+
 const analyticsServices = {
     getAnalytics,
+    getMostOrderedProducts,
 }
 
 export default analyticsServices;

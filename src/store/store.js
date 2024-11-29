@@ -12,6 +12,7 @@ import orderedReducer from './slices/orderedProductsSlice';
 import transitReducer from './slices/transitProductsSlice';
 import processedReducer from './slices/processedProductsSlice';
 import orderReducer from './slices/orderSlice'
+import analyticsReducer from './slices/analyticsSlice';
 
 import { initialiseUser } from './slices/authSlice';
 
@@ -29,7 +30,8 @@ export const store = configureStore({
         ordered: orderedReducer,
         transit: transitReducer,
         processed: processedReducer,
-        order: orderReducer
+        order: orderReducer,
+        analytics: analyticsReducer,
     },
 });
 
